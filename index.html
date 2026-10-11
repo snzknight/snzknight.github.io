@@ -1,212 +1,588 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<!doctype html>
+<html lang="en">
 
-<!-- Meta tags for search engines to crawl -->
-<meta name="robots" content="index,follow">
-<meta name="keywords" content="Naizhe Sun; 孙乃哲; Computer Vision;">
-<link rel="author" href="https://snzknight.github.io/">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="index,follow">
+  <meta name="keywords" content="Naizhe Sun, 孙乃哲, 中国海洋大学, Computer Vision, Artificial Intelligence">
+  <meta name="description" content="Personal homepage of Naizhe Sun.">
+  <meta name="author" content="Naizhe Sun">
+  <title>Naizhe Sun | Personal Homepage</title>
+  <style>
+    :root {
+      --ink: #172332;
+      --muted: #607080;
+      --line: #dbe3e8;
+      --paper: #fff;
+      --canvas: #f4f7f7;
+      --accent: #087e8b;
+      --accent-dark: #05616b;
+      --warm: #e8b86d;
+      --shadow: 0 18px 55px rgba(23, 35, 50, .08);
+    }
 
-	<title>Naizhe Sun's Homepage</title>
-	<style>
-@media screen and (max-device-width: 480px){
-  body{
-    -webkit-text-size-adjust: none;
-  }
-}
-p { font-size : 16px; }
-h1 { font-size : 34px; margin : 0; padding : 0; }
-h2 { font-size : 20px; margin : 0; padding : 0; }
-h3 { font-size : 18px; margin : 8; padding : 0; }
-td { padding: 10px; line-height: normal; background-color: white; }
-table { border: 0; margin: 10px 10px 30px 0px; border-collapse: separate; border-spacing: 0px; background-color: white; }
-/*tr {margin-bottom : 20px; }*/
-body { padding : 0; font-family : Arial; font-size : 16px; background-color : #ddd; }
-.title { width : 900px; margin : 30px auto; border-radius: 10px; background-color : #fff;padding : 20px;}
-.container { width : 900px; margin : 20px auto; border-radius: 10px;  background-color : #fff; padding : 20px;  clear:both;}
-#bio {
-    padding-top : 20px;
-}
-#me { border : 0 solid black; margin-bottom : 20px; border-radius : 10px; }
-#sidebar { margin-left : 50px; border : 0 solid black; float : right; margin-bottom : 0px;}
-a { text-decoration : none; }
-a:hover { text-decoration : underline; }
-a, a:visited { color : #0050e7; }
-.publogo { width: 100 px; margin-right : 0px; float : left; border : 0;}
-/*.publication { clear : left; padding-bottom : 10px;}*/
-.publication {}
-.publication p { height : 100px; padding-top : 5px;}
-.publication strong a { color : #0000A0; }
-.links { position : relative; top : 15px }
-.links a { margin-right : 20px; }
+    * {
+      box-sizing: border-box;
+    }
 
-.paperTitle{ font-style: bold; margin-bottom: 1em;}
+    html {
+      scroll-behavior: smooth;
+    }
 
-.authors{margin-bottom: 0.5em;}
+    body {
+      margin: 0;
+      color: var(--ink);
+      background: var(--canvas);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      font-size: 16px;
+      line-height: 1.75;
+      -webkit-font-smoothing: antialiased;
+    }
 
-.avenue{font-style: italic; margin-bottom: 0.3em;}
+    a {
+      color: var(--accent-dark);
+      text-decoration: none;
+    }
 
-.codelogo { margin-right : 10px; float : left; border : 0;}
-.code { clear : left; padding-bottom : 10px; vertical-align :middle;} 
-.code .download a { display : block; margin : 0 15px; float : left;}
-.code strong a { color : #000; }
-.external a { margin : 0 10px; }
-.external a.first { margin : 0 10px 0 0; }
-	</style>
+    a:hover {
+      color: var(--accent);
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+
+    .site-header {
+      max-width: 1160px;
+      margin: 0 auto;
+      padding: 22px 32px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .wordmark {
+      color: var(--ink);
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 1.05rem;
+      font-weight: 700;
+      letter-spacing: .015em;
+    }
+
+    .site-nav {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+    }
+
+    .site-nav a {
+      color: var(--muted);
+      font-size: .84rem;
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+
+    .site-nav a:hover {
+      color: var(--accent-dark);
+      text-decoration: none;
+    }
+
+    .language-toggle {
+      min-width: 52px;
+      padding: 4px 8px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      color: var(--accent-dark);
+      background: transparent;
+      font: inherit;
+      font-size: .72rem;
+      font-weight: 800;
+      letter-spacing: .05em;
+      cursor: pointer;
+    }
+
+    .language-toggle:hover,
+    .language-toggle:focus-visible {
+      border-color: var(--accent);
+      background: #e6f1f2;
+      outline: none;
+    }
+
+    .hero {
+      max-width: 1160px;
+      min-height: 420px;
+      margin: 0 auto 44px;
+      padding: 54px 64px;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 224px;
+      align-items: center;
+      gap: 64px;
+      position: relative;
+      overflow: hidden;
+      color: #f9fcfc;
+      background: #172f3c;
+      box-shadow: var(--shadow);
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      width: 530px;
+      height: 530px;
+      top: -305px;
+      right: -95px;
+      border: 1px solid rgba(232, 184, 109, .5);
+      border-radius: 50%;
+      box-shadow: 0 0 0 48px rgba(8, 126, 139, .16), 0 0 0 96px rgba(8, 126, 139, .09);
+    }
+
+    .hero-content,
+    .portrait {
+      position: relative;
+      z-index: 1;
+    }
+
+    .eyebrow {
+      margin: 0 0 12px;
+      color: var(--warm);
+      font-size: .78rem;
+      font-weight: 800;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+    }
+
+    h1,
+    h2,
+    h3 {
+      font-family: Georgia, "Times New Roman", serif;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(2.5rem, 5vw, 4.4rem);
+      line-height: 1.02;
+      font-weight: 700;
+      letter-spacing: -.035em;
+    }
+
+    .chinese-name {
+      display: inline-block;
+      margin-left: .1em;
+      color: #b8d1d4;
+      font-size: .52em;
+      font-weight: 400;
+      letter-spacing: 0;
+      white-space: nowrap;
+    }
+
+    .role {
+      max-width: 600px;
+      margin: 22px 0 26px;
+      color: #c7d8da;
+      font-size: 1.1rem;
+    }
+
+    .hero-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .hero-links a {
+      padding: 7px 14px;
+      border: 1px solid rgba(255, 255, 255, .33);
+      color: #f9fcfc;
+      font-size: .84rem;
+      font-weight: 700;
+    }
+
+    .hero-links a:hover {
+      border-color: var(--warm);
+      color: var(--warm);
+      text-decoration: none;
+    }
+
+    .portrait {
+      width: 224px;
+    }
+
+    .portrait img {
+      display: block;
+      width: 100%;
+      aspect-ratio: 1;
+      object-fit: cover;
+      filter: saturate(.86);
+      border: 8px solid rgba(255, 255, 255, .1);
+    }
+
+    .portrait::before {
+      content: "";
+      position: absolute;
+      z-index: -1;
+      width: 100%;
+      height: 100%;
+      top: 17px;
+      left: 17px;
+      border: 1px solid var(--warm);
+    }
+
+    main {
+      max-width: 1160px;
+      margin: 0 auto 70px;
+      padding: 0 32px;
+    }
+
+    .section {
+      padding: 48px 0;
+      border-top: 1px solid var(--line);
+    }
+
+    .section:first-child {
+      border-top: 0;
+      padding-top: 0;
+    }
+
+    .section-heading {
+      display: grid;
+      grid-template-columns: 180px minmax(0, 1fr);
+      gap: 36px;
+    }
+
+    .section-label {
+      margin: 7px 0 0;
+      color: var(--accent);
+      font-size: .75rem;
+      font-weight: 800;
+      letter-spacing: .15em;
+      text-transform: uppercase;
+    }
+
+    h2 {
+      margin: 0 0 21px;
+      font-size: clamp(1.75rem, 3vw, 2.35rem);
+      line-height: 1.15;
+      letter-spacing: -.025em;
+    }
+
+    .section-content> :first-child {
+      margin-top: 0;
+    }
+
+    .section-content> :last-child {
+      margin-bottom: 0;
+    }
+
+    .section-content p {
+      max-width: 740px;
+      margin: 0 0 18px;
+    }
+
+    .facts {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      max-width: 700px;
+      margin: 27px 0 0;
+      border-top: 1px solid var(--line);
+    }
+
+    .fact {
+      padding: 14px 20px 12px 0;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .fact:nth-child(even) {
+      padding-left: 20px;
+      padding-right: 0;
+    }
+
+    .fact-label {
+      display: block;
+      color: var(--muted);
+      font-size: .71rem;
+      font-weight: 800;
+      letter-spacing: .11em;
+      text-transform: uppercase;
+    }
+
+    .fact-value {
+      display: block;
+      margin-top: 3px;
+      font-size: .93rem;
+    }
+
+    .interests {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 1px;
+      max-width: 740px;
+      background: var(--line);
+      border: 1px solid var(--line);
+    }
+
+    .interest {
+      padding: 17px 20px;
+      background: var(--paper);
+    }
+
+    .interest strong {
+      display: block;
+      margin-bottom: 1px;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 1.05rem;
+    }
+
+    .interest span {
+      color: var(--muted);
+      font-size: .91rem;
+    }
+
+    .publication-list {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .publication {
+      padding: 0 0 28px;
+      margin-bottom: 28px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .publication:last-child {
+      padding-bottom: 0;
+      margin-bottom: 0;
+      border-bottom: 0;
+    }
+
+    .publication-title {
+      display: block;
+      margin-bottom: 7px;
+      color: var(--ink);
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 1.2rem;
+      line-height: 1.4;
+      font-weight: 700;
+    }
+
+    .publication-title:hover {
+      color: var(--accent-dark);
+    }
+
+    .authors {
+      margin: 0 0 3px;
+      color: #455462;
+      font-size: .94rem;
+      line-height: 1.65;
+    }
+
+    .venue {
+      margin: 0 0 10px;
+      color: var(--muted);
+      font-size: .9rem;
+      font-style: italic;
+    }
+
+    .doi {
+      display: inline-block;
+      padding-bottom: 1px;
+      border-bottom: 1px solid currentColor;
+      font-size: .78rem;
+      font-weight: 800;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+
+    .doi:hover {
+      text-decoration: none;
+    }
+
+    .site-footer {
+      max-width: 1160px;
+      margin: 0 auto;
+      padding: 25px 32px 40px;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      font-size: .82rem;
+    }
+
+    @media (max-width:760px) {
+      .site-header {
+        padding: 17px 22px;
+      }
+
+      .site-nav {
+        gap: 14px;
+      }
+
+      .site-nav a {
+        font-size: .7rem;
+      }
+
+      .language-toggle { font-size: .66rem; }
+
+      .hero {
+        min-height: 0;
+        margin-bottom: 30px;
+        padding: 46px 30px 50px;
+        grid-template-columns: 1fr;
+        gap: 38px;
+      }
+
+      .hero::after {
+        width: 320px;
+        height: 320px;
+        top: -225px;
+        right: -130px;
+      }
+
+      .portrait {
+        width: min(185px, 58vw);
+      }
+
+      main {
+        padding: 0 22px;
+        margin-bottom: 42px;
+      }
+
+      .section {
+        padding: 37px 0;
+      }
+
+      .section-heading {
+        grid-template-columns: 1fr;
+        gap: 13px;
+      }
+
+      .section-label {
+        margin: 0;
+      }
+
+      .facts,
+      .interests {
+        grid-template-columns: 1fr;
+      }
+
+      .fact:nth-child(even) {
+        padding-left: 0;
+      }
+
+      .site-footer {
+        padding: 22px 22px 31px;
+      }
+    }
+
+    @media (max-width:400px) {
+      .site-nav {
+        gap: 11px;
+      }
+
+      .site-nav a {
+        letter-spacing: .04em;
+      }
+
+      .wordmark {
+        font-size: .93rem;
+      }
+
+      .hero {
+        padding-left: 24px;
+        padding-right: 24px;
+      }
+    }
+  </style>
 </head>
 
 <body>
-	<div class="title">
-        <div id="sidebar"><img src="./homepage_files/avatar.jpg" vspace="20 px" width="200 px" id="me" itemprop="photo"></div>
-		<div id="bio">
-
-			<h1>
-				<span itemprop="name">Naizhe Sun (孙乃哲)</span>
-			</h1>
-
-			<p style="line-height:25px;">MS Student @OUC (中国海洋大学)</span></p>
-			<!-- <HR size=5> -->
-			<p style="line-height:25px;">
-
-            <br>
-                <br>
-                College of Electronic Engineering, Ocean University of China
-                <br>
-                Qingdao, China
-                <br>
-                <b>Email:</b> sunnaizhe at stu dot ouc dot edu dot cn
-                <br>
-                <span class="links">
-                    <a href="https://github.com/snzknight">GitHub</a>
-                </span>
-
-			</p>
-
-		</div>
-	</div>
-
-	<div class="container">
-		<!-- <HR size=2> -->
-		<h2>Short Bio</h2>
-        <p>
-            I am currently a third-year master's student at <a href="http://eweb.ouc.edu.cn/">Ocean University of China</a>,
-            supervised by Prof. <a href="https://ouc.ai/zhenghaiyong/flyzhygg/zhy.html">Haiyong Zheng</a>. I received my bachelor's degree in Communication Engineering from <a
-                href="https://english.qut.edu.cn/">Qingdao University of Technology</a> in 2023. My research interests lie in deep
-            learning and computer vision, focusing on developing advanced techniques and applications in these fields.
-        </p>
-
-        <p>
-            My recent work concentrates on interactive applications of AI large models, <b>advocating for natural and efficient
-            human-computer interaction</b> to enhance the perceptual and responsive capabilities of large models, thereby promoting
-            their seamless integration into practical scenarios.
-        </p>
-	</div>
-
-<div class="container">
-    <h2>Hobbies</h2>
-    <br>
-    <div class="hobbies-container">
-        <div class="hobby-item">
-            <span class="hobby-emoji">📸<b>Photography</b></span>
-            <div class="hobby-desc">Capturing beautiful moments in life through the lens, documenting natural landscapes
-                and cultural scenes.</div>
-        </div>
-<br>
-        <div class="hobby-item">
-            <span class="hobby-emoji">🎬<b>Video Editing</b></span>
-            <div class="hobby-desc">Creating compelling visual stories by combining footage, audio, and effects to
-                convey emotions and narratives.</div>
-        </div>
-<br>
-        <div class="hobby-item">
-            <span class="hobby-emoji">🚴<b>Cycling</b></span>
-            <div class="hobby-desc">Enjoying the freedom and sense of exploration that cycling brings, feeling the pulse
-                of nature and the city.</div>
-        </div>
-<br>
-        <div class="hobby-item">
-            <span class="hobby-emoji">🏊<b>Swimming</b></span>
-            <div class="hobby-desc">Finding balance and tranquility in the water, exercising the body while relaxing the
-                mind.</div>
-        </div>
-<br>
+  <header class="site-header"><a class="wordmark" href="#top">Naizhe Sun</a>
+    <nav class="site-nav" aria-label="Primary navigation" data-i18n-aria="navigation"><a href="#about" data-i18n="navAbout">About</a><a href="#interests" data-i18n="navInterests">Interests</a><a href="#publications" data-i18n="navPublications">Publications</a><button class="language-toggle" type="button" aria-label="切换至中文" data-i18n-aria="toggleLabel">中文</button></nav>
+  </header>
+  <section class="hero" id="top" aria-labelledby="name">
+    <div class="hero-content">
+      <p class="eyebrow" data-i18n="eyebrow">Personal Homepage</p>
+      <h1 id="name">Naizhe Sun <span class="chinese-name">孙乃哲</span></h1>
+      <p class="role" data-i18n="role">M.S. @Ocean University of China（中国海洋大学）</p>
+      <div class="hero-links"><a href="mailto:sunnaizhe@stu.ouc.edu.cn" data-i18n="email">Email</a><a href="https://github.com/snzknight">GitHub</a></div>
     </div>
-</div>
-
-    <div class="container">
-        <h2>Publications</h2>
-        <table>
-        
-        
-            <tr>
-                <!-- <td align="center"><img src="./projects/a.jpg" class="publogo" width="240 px"></td> -->
-                <td>
-                    <div class="paperTitle">
-                       <b>FishFaceID: A deep learning-based non-invasive system for aquaculture organism individual identification</b>
-                    </div>
-        
-                    <div class="authors">Qinyue Zhang, Zhensheng Shi, Naizhe Sun, Yangfan Wang, Lingling Zhang, Bo Wang, Xiaogang Xun, Bing Zheng, Haiyong Zheng.
-                    </div>
-                    <div class="avenue">Aquaculture, 2025</div>
-                    <span class="links">
-                        <a href="https://doi.org/10.1016/j.aquaculture.2025.743375">DOI</a>
-                        <!-- <a href="./projects/CoralSRT/CoralSRT.pdf">PDF</a>
-                        <a href="https://coralsrt.hkustvgd.com/">Website</a> -->
-                    </span>
-                </td>
-            </tr>
-
-<tr class="separator">
-    <td>
-        <hr>
-    </td>
-</tr>
-
-
-            <tr>
-                <!-- <td align="center"><img src="./projects/a.jpg" class="publogo" width="240 px"></td> -->
-                <td>
-                    <div class="paperTitle">
-                        <b>OUC-MOI-ID: A Benchmark Dataset for Marine Organism Individual Identification</b>
-                    </div>
-                    <div class="authors">Qinyue Zhang, Zhensheng Shi, Naizhe Sun, Yangfan Wang, Lingling Zhang, Bing Zheng, Haiyong Zheng.
-                    </div>
-                    <div class="avenue">Proceedings of the First International Conference on Advanced Robotics, Control, and Artificial Intelligence (ICARCAI 2024)</div>
-                    <span class="links">
-
-                                    <a href="https://doi.org/10.1007/978-981-96-5373-7_15">DOI</a>
-                                    <!-- <a href="./projects/CoralSRT/CoralSRT.pdf">PDF</a>
-                                    <a href="https://coralsrt.hkustvgd.com/">Website</a> -->
-                                </span>
-                </td>
-            </tr>
-
-
-
-<tr class="separator">
-    <td>
-        <hr>
-    </td>
-</tr>
-            <tr>
-                <!-- <td align="center"><img src="./projects/a.jpg" class="publogo" width="240 px"></td> -->
-                <td>
-                    <div class="paperTitle">
-                        <b>MCAD-MM: a benchmark dataset and method for multi-channel acoustic detection of marine mammals</b>
-                    </div>
-            
-                    <div class="authors">Nan Li, Zhensheng Shi, Yuqi Shao, Naizhe Sun, Bing Zheng, Haiyong Zheng.
-                    </div>
-                    <div class="avenue">Intelligent Marine Technology and Systems, 2025</div>
-                    <span class="links">
-                                                <a href="https://doi.org/10.1007/s44295-024-00051-2">DOI</a>
-                                                <!-- <a href="./projects/CoralSRT/CoralSRT.pdf">PDF</a>
-                                                <a href="https://coralsrt.hkustvgd.com/">Website</a> -->
-                                            </span>
-                </td>
-            </tr>
-        </table>
-        <!-- <h2><a href="./publications.html">Full Publications</a></h2> -->
+    <div class="portrait"><img src="./homepage_files/avatar.jpg" alt="Portrait of Naizhe Sun" data-i18n-alt="portraitAlt"></div>
+  </section>
+  <main>
+    <section class="section" id="about" aria-labelledby="about-title">
+      <div class="section-heading">
+        <p class="section-label" data-i18n="profileLabel">01 — Profile</p>
+        <div class="section-content">
+          <h2 id="about-title" data-i18n="aboutTitle">About</h2>
+          <p data-i18n-html="aboutOne">I am a master's graduate from the <a href="http://eweb.ouc.edu.cn/">College of Electronic Engineering, Ocean University of China</a>. I was supervised by Prof. <a href="https://ouc.ai/zhenghaiyong/flyzhygg/zhy.html">Haiyong Zheng</a>.</p>
+          <p data-i18n="aboutTwo">My graduate research focused on interactive applications of AI large models. I explored natural and efficient human–computer interaction approaches that strengthen models' perceptual and responsive capabilities and help bring them into practical settings. More broadly, my academic interests include deep learning and computer vision.</p>
+          <div class="facts" aria-label="Academic background" data-i18n-aria="academicBackground">
+            <div class="fact"><span class="fact-label" data-i18n="msLabel">M.S.</span><span class="fact-value" data-i18n="msDegree">Electronic Information Engineering, Ocean University of China · 2026</span></div>
+            <div class="fact"><span class="fact-label" data-i18n="bsLabel">B.S.</span><span class="fact-value" data-i18n="bsDegree">Communication Engineering, Qingdao University of Technology · 2023</span></div>
+          </div>
         </div>
+      </div>
+    </section>
+    <section class="section" id="interests" aria-labelledby="interests-title">
+      <div class="section-heading">
+        <p class="section-label" data-i18n="interestsLabel">02 — Beyond Research</p>
+        <div class="section-content">
+          <h2 id="interests-title" data-i18n="interestsTitle">Interests</h2>
+          <div class="interests">
+            <div class="interest"><strong data-i18n="photographyTitle">📷 Photography</strong><span data-i18n="photographyText">Collecting light, places, and everyday moments.</span></div>
+            <div class="interest"><strong data-i18n="editingTitle">🎬 Video Editing</strong><span data-i18n="editingText">Shaping concise stories through moving images.</span></div>
+            <div class="interest"><strong data-i18n="cyclingTitle">🚴‍♂️ Cycling</strong><span data-i18n="cyclingText">Exploring at an unhurried pace.</span></div>
+            <div class="interest"><strong data-i18n="swimmingTitle">🏊‍♂️ Swimming</strong><span data-i18n="swimmingText">Finding calm and balance in the water.</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="section" id="publications" aria-labelledby="publications-title">
+      <div class="section-heading">
+        <p class="section-label" data-i18n="publicationsLabel">03 — Selected Work</p>
+        <div class="section-content">
+          <h2 id="publications-title" data-i18n="publicationsTitle">Publications</h2>
+          <ol class="publication-list">
+            <li class="publication"><a class="publication-title" href="https://doi.org/10.1016/j.aquaculture.2025.743375" data-i18n="paperOneTitle">FishFaceID: A Deep Learning-based Non-Invasive System for Aquaculture Organism Individual Identification</a>
+              <p class="authors">Qinyue Zhang, Zhensheng Shi, Naizhe Sun, Yangfan Wang, Lingling Zhang, Bo Wang, Xiaogang Xun, Bing Zheng, Haiyong Zheng.</p>
+              <p class="venue" data-i18n="paperOneVenue">Aquaculture, 2025</p><a class="doi" href="https://doi.org/10.1016/j.aquaculture.2025.743375">DOI</a> <a class="doi" href="http://ouc.ai/project/FishFaceID" data-i18n="project">Project</a>
+            </li>
+            <li class="publication"><a class="publication-title" href="https://doi.org/10.1007/978-981-96-5373-7_15" data-i18n="paperTwoTitle">OUC-MOI-ID: A Benchmark Dataset for Marine Organism Individual Identification</a>
+              <p class="authors">Qinyue Zhang, Zhensheng Shi, Naizhe Sun, Yangfan Wang, Lingling Zhang, Bing Zheng, Haiyong Zheng.</p>
+              <p class="venue" data-i18n="paperTwoVenue">Proceedings of the First International Conference on Advanced Robotics, Control, and Artificial Intelligence (ICARCAI 2024)</p><a class="doi" href="https://doi.org/10.1007/978-981-96-5373-7_15">DOI</a>
+            </li>
+            <li class="publication"><a class="publication-title" href="https://doi.org/10.1007/s44295-024-00051-2" data-i18n="paperThreeTitle">MCAD-MM: A Benchmark Dataset and Method for Multi-Channel Acoustic Detection of Marine Mammals</a>
+              <p class="authors">Nan Li, Zhensheng Shi, Yuqi Shao, Naizhe Sun, Bing Zheng, Haiyong Zheng.</p>
+              <p class="venue" data-i18n="paperThreeVenue">Intelligent Marine Technology and Systems, 2025</p><a class="doi" href="https://doi.org/10.1007/s44295-024-00051-2">DOI</a>
+            </li>
+          </ol>
+        </div>
+      </div>
+    </section>
+  </main>
+  <footer class="site-footer">© <span id="year"></span> Naizhe Sun · <span data-i18n="location">Qingdao, China</span></footer>
+  <script>
+    const translations = {
+      en: {
+        pageTitle: 'Naizhe Sun | Personal Homepage', navigation: 'Primary navigation', toggleLabel: 'Switch to Chinese', navAbout: 'About', navInterests: 'Interests', navPublications: 'Publications', eyebrow: 'Personal Homepage', role: 'M.S. @Ocean University of China（中国海洋大学）', email: 'Email', portraitAlt: 'Portrait of Naizhe Sun', profileLabel: '01 — Profile', aboutTitle: 'About', aboutOne: 'I am a master\'s graduate from the <a href="http://eweb.ouc.edu.cn/">College of Electronic Engineering, Ocean University of China</a>. I was supervised by Prof. <a href="https://ouc.ai/zhenghaiyong/flyzhygg/zhy.html">Haiyong Zheng</a>.', aboutTwo: 'My graduate research focused on interactive applications of AI large models. I explored natural and efficient human–computer interaction approaches that strengthen models\' perceptual and responsive capabilities and help bring them into practical settings. More broadly, my academic interests include deep learning and computer vision.', academicBackground: 'Academic background', msLabel: 'M.S.', msDegree: 'Electronic Information Engineering, Ocean University of China · 2026', bsLabel: 'B.S.', bsDegree: 'Communication Engineering, Qingdao University of Technology · 2023', interestsLabel: '02 — Beyond Research', interestsTitle: 'Interests', photographyTitle: '📷 Photography', photographyText: 'Collecting light, places, and everyday moments.', editingTitle: '🎬 Video Editing', editingText: 'Shaping concise stories through moving images.', cyclingTitle: '🚴‍♂️ Cycling', cyclingText: 'Exploring at an unhurried pace.', swimmingTitle: '🏊‍♂️ Swimming', swimmingText: 'Finding calm and balance in the water.', publicationsLabel: '03 — Selected Work', publicationsTitle: 'Publications', paperOneTitle: 'FishFaceID: A Deep Learning-based Non-Invasive System for Aquaculture Organism Individual Identification', paperOneVenue: 'Aquaculture, 2025', project: 'Project', paperTwoTitle: 'OUC-MOI-ID: A Benchmark Dataset for Marine Organism Individual Identification', paperTwoVenue: 'Proceedings of the First International Conference on Advanced Robotics, Control, and Artificial Intelligence (ICARCAI 2024)', paperThreeTitle: 'MCAD-MM: A Benchmark Dataset and Method for Multi-Channel Acoustic Detection of Marine Mammals', paperThreeVenue: 'Intelligent Marine Technology and Systems, 2025', location: 'Qingdao, China'
+      },
+      zh: {
+        pageTitle: '孙乃哲 | 个人主页', navigation: '主导航', toggleLabel: 'Switch to English', navAbout: '简介', navInterests: '兴趣', navPublications: '论文', eyebrow: '个人主页', role: '新一代电子信息技术｜硕士 @中国海洋大学', email: '邮箱', portraitAlt: '孙乃哲的肖像照', profileLabel: '01 — 个人简介', aboutTitle: '简介', aboutOne: '我毕业于<a href="http://eweb.ouc.edu.cn/">中国海洋大学电子工程学院</a>，师从<a href="https://ouc.ai/zhenghaiyong/flyzhygg/zhy.html">郑海永教授</a>。', aboutTwo: '我的硕士研究聚焦于 AI 大模型的交互式应用，探索自然、高效的人机交互方式，以提升模型的感知与响应能力，并推动其在实际场景中的应用。此外，我的学术兴趣还包括深度学习与计算机视觉。', academicBackground: '教育背景', msLabel: '硕士', msDegree: '新一代电子信息技术，中国海洋大学 · 2026', bsLabel: '学士', bsDegree: '通信工程，青岛理工大学 · 2023', interestsLabel: '02 — 研究之外', interestsTitle: '兴趣爱好', photographyTitle: '📷 摄影', photographyText: '收集光影、地点与日常瞬间。', editingTitle: '🎬 视频剪辑', editingText: '用动态影像讲述简洁的故事。', cyclingTitle: '🚴‍♂️ 骑行', cyclingText: '以从容的节奏探索世界。', swimmingTitle: '🏊‍♂️ 游泳', swimmingText: '在水中寻找平静与平衡。', publicationsLabel: '03 — 代表成果', publicationsTitle: '论文发表', paperOneTitle: 'FishFaceID：基于深度学习的水产养殖生物个体无创识别系统', paperOneVenue: 'Aquaculture，2025', project: '项目', paperTwoTitle: 'OUC-MOI-ID：海洋生物个体识别基准数据集', paperTwoVenue: '第一届先进机器人、控制与人工智能国际会议论文集（ICARCAI 2024）', paperThreeTitle: 'MCAD-MM：多通道海洋哺乳动物声学检测基准数据集与方法', paperThreeVenue: 'Intelligent Marine Technology and Systems，2025', location: '中国·青岛'
+      }
+    };
 
+    const toggle = document.querySelector('.language-toggle');
+    const setLanguage = (language) => {
+      const copy = translations[language];
+      document.documentElement.lang = language === 'zh' ? 'zh-CN' : 'en';
+      document.title = copy.pageTitle;
+      document.querySelectorAll('[data-i18n]').forEach((element) => { element.textContent = copy[element.dataset.i18n]; });
+      document.querySelectorAll('[data-i18n-html]').forEach((element) => { element.innerHTML = copy[element.dataset.i18nHtml]; });
+      document.querySelectorAll('[data-i18n-aria]').forEach((element) => { element.setAttribute('aria-label', copy[element.dataset.i18nAria]); });
+      document.querySelectorAll('[data-i18n-alt]').forEach((element) => { element.alt = copy[element.dataset.i18nAlt]; });
+      toggle.textContent = language === 'zh' ? 'EN' : '中文';
+      document.getElementById('year').textContent = new Date().getFullYear();
+    };
 
+    toggle.addEventListener('click', () => setLanguage(document.documentElement.lang === 'zh-CN' ? 'en' : 'zh'));
+    setLanguage('en');
+  </script>
 </body>
+</html>
