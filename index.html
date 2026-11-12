@@ -1,596 +1,2451 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-theme="light">
 
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="robots" content="index,follow">
-  <meta name="keywords" content="Naizhe Sun, 孙乃哲, 中国海洋大学, Computer Vision, Artificial Intelligence">
-  <meta name="description" content="Personal homepage of Naizhe Sun.">
+  <meta name="keywords"
+    content="Naizhe Sun, 孙乃哲, 中国海洋大学, Ocean University of China, Computer Vision, AI, Deep Learning">
+  <meta name="description" content="Personal homepage of Naizhe Sun (孙乃哲).">
   <meta name="author" content="Naizhe Sun">
   <title>Naizhe Sun | Personal Homepage</title>
+
+  <!-- Prevent theme flicker before DOM render -->
+  <script>
+    (function () {
+      const savedTheme = localStorage.getItem('theme') || 'light';
+      document.documentElement.setAttribute('data-theme', savedTheme);
+    })();
+  </script>
+
+  <!-- Google Fonts: Inter & Newsreader for elegant editorial aesthetic -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Inter:wght@300;400;500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=JetBrains+Mono:wght@400;500&display=swap"
+    rel="stylesheet">
+
   <style>
+    /* =========================================================
+       CSS VARIABLES & THEME DEFINITIONS
+       Default: Crisp Editorial Light Theme
+       [data-theme="dark"]: Deep Cosmic Dark Theme
+       ========================================================= */
     :root {
-      --ink: #172332;
-      --muted: #607080;
-      --line: #dbe3e8;
-      --paper: #fff;
-      --canvas: #f4f7f7;
-      --accent: #087e8b;
-      --accent-dark: #05616b;
-      --warm: #e8b86d;
-      --shadow: 0 18px 55px rgba(23, 35, 50, .08);
+      /* Light Theme (Default) */
+      --bg: #f8fafc;
+      --bg-subtle: #ffffff;
+      --bg-card: rgba(255, 255, 255, 0.86);
+      --bg-card-hover: rgba(255, 255, 255, 0.98);
+      --border: rgba(15, 23, 42, 0.08);
+      --border-accent: rgba(13, 148, 136, 0.38);
+      --ink: #0f172a;
+      --ink-dim: #475569;
+      --ink-faint: #64748b;
+
+      --accent: #0d9488;
+      /* Editorial Teal */
+      --accent-hover: #0f766e;
+      --accent-glow: rgba(13, 148, 136, 0.16);
+      --accent-warm: #d97706;
+      /* Refined Amber Gold */
+      --accent-warm-soft: rgba(217, 119, 6, 0.09);
+      --accent-marine: #0284c7;
+
+      --header-bg: rgba(255, 255, 255, 0.82);
+      --header-bg-scrolled: rgba(255, 255, 255, 0.94);
+      --hero-bg: linear-gradient(135deg, rgba(255, 255, 255, 0.94) 0%, rgba(241, 245, 249, 0.92) 100%);
+      --hero-name-color: #0f172a;
+      --hero-role-color: #475569;
+
+      --action-primary-bg: #0d9488;
+      --action-primary-ink: #ffffff;
+      --action-primary-hover: #0f766e;
+      --action-sec-bg: rgba(255, 255, 255, 0.85);
+      --action-sec-ink: #1e293b;
+      --action-sec-border: rgba(15, 23, 42, 0.12);
+      --action-sec-hover: #0f172a;
+
+      --bibtex-bg: #f8fafc;
+      --bibtex-ink: #334155;
+      --bibtex-border: rgba(15, 23, 42, 0.1);
+      --copy-btn-bg: rgba(15, 23, 42, 0.05);
+
+      --portrait-bg: #ffffff;
+      --portrait-border: rgba(15, 23, 42, 0.08);
+      --portrait-dashed: rgba(13, 148, 136, 0.35);
+
+      --font-sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      --font-serif: "Newsreader", "Times New Roman", Georgia, serif;
+      --font-mono: "JetBrains Mono", monospace;
+
+      --radius-sm: 8px;
+      --radius-md: 14px;
+      --radius-lg: 22px;
+      --radius-full: 9999px;
+
+      --shadow-sm: 0 4px 16px rgba(15, 23, 42, 0.05);
+      --shadow-lg: 0 20px 45px -12px rgba(15, 23, 42, 0.08), 0 0 25px rgba(13, 148, 136, 0.06);
+      --transition-smooth: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    [data-theme="dark"] {
+      /* Dark Theme */
+      --bg: #0d131a;
+      --bg-subtle: #121b24;
+      --bg-card: rgba(22, 33, 46, 0.72);
+      --bg-card-hover: rgba(28, 43, 60, 0.88);
+      --border: rgba(148, 180, 204, 0.14);
+      --border-accent: rgba(72, 191, 198, 0.4);
+      --ink: #eaf0f6;
+      --ink-dim: #94a8be;
+      --ink-faint: #5a7088;
+
+      --accent: #2dd4bf;
+      /* Cyan / Aqua Teal */
+      --accent-hover: #3ee2ce;
+      --accent-glow: rgba(45, 212, 191, 0.25);
+      --accent-warm: #f59e0b;
+      /* Amber Gold */
+      --accent-warm-soft: rgba(245, 158, 11, 0.12);
+      --accent-marine: #0284c7;
+
+      --header-bg: rgba(13, 22, 31, 0.78);
+      --header-bg-scrolled: rgba(11, 18, 26, 0.92);
+      --hero-bg: linear-gradient(135deg, rgba(22, 33, 46, 0.85) 0%, rgba(14, 23, 33, 0.95) 100%);
+      --hero-name-color: #ffffff;
+      --hero-role-color: #b2c5d8;
+
+      --action-primary-bg: #2dd4bf;
+      --action-primary-ink: #0b131c;
+      --action-primary-hover: #3ee2ce;
+      --action-sec-bg: rgba(255, 255, 255, 0.05);
+      --action-sec-ink: #eaf0f6;
+      --action-sec-border: var(--border);
+      --action-sec-hover: #ffffff;
+
+      --bibtex-bg: #090e14;
+      --bibtex-ink: #8da4be;
+      --bibtex-border: rgba(255, 255, 255, 0.08);
+      --copy-btn-bg: rgba(255, 255, 255, 0.08);
+
+      --portrait-bg: #101923;
+      --portrait-border: rgba(255, 255, 255, 0.15);
+      --portrait-dashed: rgba(45, 212, 191, 0.35);
+
+      --shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.25);
+      --shadow-lg: 0 20px 50px -10px rgba(0, 0, 0, 0.5), 0 0 35px var(--accent-glow);
     }
 
     * {
       box-sizing: border-box;
+      margin: 0;
+      padding: 0;
     }
 
     html {
       scroll-behavior: smooth;
+      scroll-padding-top: 86px;
     }
 
     body {
-      margin: 0;
+      background-color: var(--bg);
       color: var(--ink);
-      background: var(--canvas);
-      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      font-size: 16px;
-      line-height: 1.75;
+      font-family: var(--font-sans);
+      font-size: 15.5px;
+      line-height: 1.72;
       -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+      position: relative;
+      transition: background-color 0.3s ease, color 0.3s ease;
     }
 
-    a {
-      color: var(--accent-dark);
-      text-decoration: none;
+    /* Ambient dynamic background canvas & glow spots */
+    .ambient-canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0.6;
     }
 
-    a:hover {
+    .ambient-glow {
+      position: fixed;
+      border-radius: 50%;
+      filter: blur(100px);
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0.12;
+      transition: transform 1.2s cubic-bezier(0.1, 1, 0.2, 1);
+    }
+
+    [data-theme="dark"] .ambient-glow {
+      opacity: 0.18;
+    }
+
+    .ambient-glow-1 {
+      top: -10vw;
+      right: -5vw;
+      width: 45vw;
+      height: 45vw;
+      background: radial-gradient(circle, var(--accent) 0%, transparent 70%);
+    }
+
+    .ambient-glow-2 {
+      bottom: 10vh;
+      left: -10vw;
+      width: 40vw;
+      height: 40vw;
+      background: radial-gradient(circle, var(--accent-marine) 0%, transparent 70%);
+      opacity: 0.1;
+    }
+
+    /* Reading Progress Bar */
+    #progress-bar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 2.5px;
+      background: linear-gradient(90deg, var(--accent), var(--accent-warm));
+      z-index: 100;
+      width: 0%;
+      box-shadow: 0 0 10px var(--accent);
+      transition: width 0.1s ease-out;
+    }
+
+    /* Scroll To Top Button */
+    .back-to-top {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      width: 42px;
+      height: 42px;
+      border-radius: var(--radius-full);
+      background: var(--bg-card);
+      backdrop-filter: blur(12px);
+      border: 1px solid var(--border);
+      color: var(--ink-dim);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      z-index: 90;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(12px);
+      transition: var(--transition-smooth);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .back-to-top.visible {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+
+    .back-to-top:hover {
       color: var(--accent);
-      text-decoration: underline;
-      text-underline-offset: 3px;
+      border-color: var(--accent);
+      transform: translateY(-3px);
+      box-shadow: 0 8px 20px var(--accent-glow);
     }
 
+    /* Header & Navigation Bar */
     .site-header {
-      max-width: 1160px;
-      margin: 12px auto 0;
-      padding: 22px 32px;
+      position: fixed;
+      top: 14px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: min(1140px, calc(100% - 32px));
+      z-index: 50;
+      padding: 8px 18px;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      position: sticky;
-      top: 12px;
-      z-index: 10;
-      border: 1px solid rgba(255, 255, 255, .72);
-      border-radius: 18px;
-      background: rgba(229, 237, 244, .84);
-      backdrop-filter: blur(10px) saturate(1.15);
-      box-shadow: 0 10px 28px rgba(23, 35, 50, .12);
+      border-radius: var(--radius-full);
+      background: var(--header-bg);
+      backdrop-filter: blur(18px) saturate(160%);
+      -webkit-backdrop-filter: blur(18px) saturate(160%);
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow-sm);
+      transition: var(--transition-smooth);
+    }
+
+    .site-header.scrolled {
+      top: 10px;
+      background: var(--header-bg-scrolled);
+      box-shadow: var(--shadow-lg);
     }
 
     .wordmark {
-      color: var(--ink);
-      font-family: Georgia, "Times New Roman", serif;
-      font-size: 1.05rem;
-      font-weight: 700;
-      letter-spacing: .015em;
-    }
-
-    .site-nav {
       display: flex;
       align-items: center;
-      gap: 24px;
+      gap: 10px;
+      font-family: var(--font-serif);
+      font-size: 1.15rem;
+      font-weight: 600;
+      color: var(--ink);
+      text-decoration: none;
+      letter-spacing: -0.01em;
+      position: relative;
+      flex-shrink: 0;
+    }
+
+    .wordmark .logo-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 10px var(--accent);
+      animation: pulse 2.5s infinite;
+    }
+
+    @keyframes pulse {
+
+      0%,
+      100% {
+        opacity: 0.5;
+        transform: scale(0.9);
+      }
+
+      50% {
+        opacity: 1;
+        transform: scale(1.15);
+        box-shadow: 0 0 14px var(--accent);
+      }
+    }
+
+    .nav-container {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    /* Desktop Navigation Tabs */
+    .site-nav {
+      position: relative;
+      display: flex;
+      align-items: center;
+      background: rgba(125, 125, 125, 0.05);
+      padding: 4px;
+      border-radius: var(--radius-full);
+      border: 1px solid var(--border);
     }
 
     .site-nav a {
-      color: var(--muted);
-      font-size: .84rem;
-      font-weight: 700;
-      letter-spacing: .08em;
-      text-transform: uppercase;
-    }
-
-    .site-nav a:hover {
-      color: var(--accent-dark);
+      position: relative;
+      color: var(--ink-dim);
+      font-size: 0.84rem;
+      font-weight: 500;
+      letter-spacing: 0.02em;
+      padding: 6px 16px;
+      border-radius: var(--radius-full);
       text-decoration: none;
-    }
-
-    .language-toggle {
-      min-width: 52px;
-      padding: 4px 8px;
-      border: 1px solid var(--line);
-      border-radius: 999px;
-      color: var(--accent-dark);
-      background: transparent;
-      font: inherit;
-      font-size: .72rem;
-      font-weight: 800;
-      letter-spacing: .05em;
-      cursor: pointer;
-    }
-
-    .language-toggle:hover,
-    .language-toggle:focus-visible {
-      border-color: var(--accent);
-      background: #e6f1f2;
-      outline: none;
-    }
-
-    .hero {
-      max-width: 1160px;
-      min-height: 420px;
-      margin: 0 auto 44px;
-      padding: 54px 64px;
-      display: grid;
-      grid-template-columns: minmax(0, 1fr) 224px;
-      align-items: center;
-      gap: 64px;
-      position: relative;
-      overflow: hidden;
-      color: #f9fcfc;
-      background: #172f3c;
-      box-shadow: var(--shadow);
-    }
-
-    .hero::after {
-      content: "";
-      position: absolute;
-      width: 530px;
-      height: 530px;
-      top: -305px;
-      right: -95px;
-      border: 1px solid rgba(232, 184, 109, .5);
-      border-radius: 50%;
-      box-shadow: 0 0 0 48px rgba(8, 126, 139, .16), 0 0 0 96px rgba(8, 126, 139, .09);
-    }
-
-    .hero-content,
-    .portrait {
-      position: relative;
+      transition: color 0.25s ease;
       z-index: 1;
     }
 
-    .eyebrow {
-      margin: 0 0 12px;
-      color: var(--warm);
-      font-size: .78rem;
-      font-weight: 800;
-      letter-spacing: .14em;
-      text-transform: uppercase;
+    .site-nav a:hover {
+      color: var(--ink);
     }
 
-    h1,
-    h2,
-    h3 {
-      font-family: Georgia, "Times New Roman", serif;
+    .site-nav a.active {
+      color: var(--accent);
+      font-weight: 600;
     }
 
-    h1 {
-      margin: 0;
-      font-size: clamp(2.5rem, 5vw, 4.4rem);
-      line-height: 1.02;
-      font-weight: 700;
-      letter-spacing: -.035em;
+    /* Floating indicator pill inside desktop nav */
+    .nav-indicator {
+      position: absolute;
+      top: 4px;
+      left: 0;
+      height: calc(100% - 8px);
+      background: var(--accent-glow);
+      border: 1px solid var(--border-accent);
+      border-radius: var(--radius-full);
+      transition: all 0.35s cubic-bezier(0.2, 1, 0.3, 1);
+      pointer-events: none;
+      opacity: 0;
     }
 
-    .chinese-name {
-      display: inline-block;
-      margin-left: .1em;
-      color: #b8d1d4;
-      font-size: .52em;
-      font-weight: 400;
-      letter-spacing: 0;
-      white-space: nowrap;
-    }
-
-    .role {
-      max-width: 600px;
-      margin: 22px 0 26px;
-      color: #c7d8da;
-      font-size: 1.1rem;
-    }
-
-    .hero-links {
+    /* Control Actions (Theme & Language & Mobile Menu) */
+    .header-controls {
       display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    /* Theme Toggle Button */
+    .theme-toggle-btn {
+      width: 34px;
+      height: 34px;
+      border-radius: var(--radius-full);
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      color: var(--ink-dim);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: var(--transition-smooth);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .theme-toggle-btn:hover {
+      color: var(--accent);
+      border-color: var(--accent);
+      background: var(--bg-card-hover);
+      transform: translateY(-1px);
+    }
+
+    .theme-toggle-btn:active {
+      transform: scale(0.92);
+    }
+
+    .theme-toggle-btn svg {
+      transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease;
+    }
+
+    .theme-toggle-btn .sun-icon {
+      display: none;
+      transform: rotate(-30deg) scale(0.8);
+      opacity: 0;
+    }
+
+    .theme-toggle-btn .moon-icon {
+      display: block;
+      transform: rotate(0) scale(1);
+      opacity: 1;
+    }
+
+    [data-theme="dark"] .theme-toggle-btn .sun-icon {
+      display: block;
+      color: #f59e0b;
+      transform: rotate(0) scale(1);
+      opacity: 1;
+    }
+
+    [data-theme="dark"] .theme-toggle-btn .moon-icon {
+      display: none;
+      transform: rotate(30deg) scale(0.8);
+      opacity: 0;
+    }
+
+    /* Language Toggle */
+    .language-toggle {
+      padding: 6px 12px;
+      height: 34px;
+      border-radius: var(--radius-full);
+      background: var(--accent-glow);
+      border: 1px solid var(--border-accent);
+      color: var(--accent);
+      font-family: var(--font-mono);
+      font-size: 0.74rem;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      cursor: pointer;
+      transition: var(--transition-smooth);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .language-toggle:hover {
+      background: var(--accent);
+      color: var(--action-primary-ink);
+      box-shadow: 0 0 16px var(--accent-glow);
+      transform: translateY(-1px);
+    }
+
+    /* Mobile Hamburger Menu Button */
+    .mobile-menu-btn {
+      display: none;
+      width: 34px;
+      height: 34px;
+      border-radius: var(--radius-full);
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      color: var(--ink);
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: var(--transition-smooth);
+      flex-direction: column;
+      gap: 5px;
+      padding: 8px;
+    }
+
+    .mobile-menu-btn span.bar {
+      display: block;
+      width: 16px;
+      height: 2px;
+      background: currentColor;
+      border-radius: 2px;
+      transition: transform 0.25s ease, opacity 0.25s ease;
+    }
+
+    .mobile-menu-btn.open span.bar-1 {
+      transform: translateY(3.5px) rotate(45deg);
+    }
+
+    .mobile-menu-btn.open span.bar-2 {
+      transform: translateY(-3.5px) rotate(-45deg);
+    }
+
+    /* Mobile Nav Dropdown Drawer */
+    .mobile-nav-drawer {
+      display: none;
+      position: absolute;
+      top: calc(100% + 8px);
+      left: 0;
+      right: 0;
+      background: var(--header-bg-scrolled);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      box-shadow: var(--shadow-lg);
+      padding: 10px;
+      flex-direction: column;
+      gap: 4px;
+      opacity: 0;
+      transform: translateY(-8px);
+      pointer-events: none;
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .mobile-nav-drawer.open {
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: auto;
+    }
+
+    .mobile-nav-link {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 14px;
+      border-radius: var(--radius-sm);
+      color: var(--ink);
+      font-size: 0.92rem;
+      font-weight: 500;
+      text-decoration: none;
+      transition: background 0.2s;
+    }
+
+    .mobile-nav-link:hover,
+    .mobile-nav-link.active {
+      background: var(--accent-glow);
+      color: var(--accent);
+    }
+
+    /* Main Container */
+    .page-wrapper {
+      position: relative;
+      z-index: 1;
+      max-width: 1140px;
+      margin: 0 auto;
+      padding: 110px 24px 70px;
+    }
+
+    /* Hero Section */
+    .hero {
+      position: relative;
+      margin-top: 10px;
+      margin-bottom: 60px;
+      padding: 60px 56px;
+      border-radius: var(--radius-lg);
+      background: var(--hero-bg);
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow-lg);
+      backdrop-filter: blur(20px);
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 250px;
+      align-items: center;
+      gap: 52px;
+      overflow: hidden;
+      transition: background 0.3s ease, border-color 0.3s ease;
+    }
+
+    /* Subtle mesh lines in hero background */
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image:
+        radial-gradient(var(--accent-glow) 1px, transparent 1px),
+        radial-gradient(var(--accent-warm-soft) 1px, transparent 1px);
+      background-size: 28px 28px, 56px 56px;
+      background-position: 0 0, 14px 14px;
+      opacity: 0.5;
+      pointer-events: none;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+    }
+
+    .eyebrow-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 5px 14px;
+      border-radius: var(--radius-full);
+      background: var(--accent-warm-soft);
+      border: 1px solid rgba(217, 119, 6, 0.25);
+      color: var(--accent-warm);
+      font-size: 0.74rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+      backdrop-filter: blur(8px);
+    }
+
+    .eyebrow-badge .live-signal {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--accent-warm);
+      box-shadow: 0 0 8px var(--accent-warm);
+    }
+
+    h1.hero-name {
+      font-family: var(--font-serif);
+      font-size: clamp(2.6rem, 5vw, 4.2rem);
+      line-height: 1.08;
+      font-weight: 600;
+      letter-spacing: -0.025em;
+      color: var(--hero-name-color);
+      margin-bottom: 14px;
+      display: flex;
+      align-items: baseline;
+      flex-wrap: wrap;
+      gap: 14px;
+    }
+
+    .hero-name .chinese-name {
+      font-family: var(--font-sans);
+      font-size: 0.48em;
+      font-weight: 400;
+      color: var(--ink-dim);
+      letter-spacing: 0.03em;
+      border-left: 2px solid var(--border);
+      padding-left: 14px;
+    }
+
+    .hero-role {
+      font-size: 1.08rem;
+      color: var(--hero-role-color);
+      line-height: 1.6;
+      margin-bottom: 24px;
+      display: flex;
+      align-items: center;
       flex-wrap: wrap;
       gap: 10px;
     }
 
-    .hero-links a {
-      padding: 7px 14px;
-      border: 1px solid rgba(255, 255, 255, .33);
-      color: #f9fcfc;
-      font-size: .84rem;
-      font-weight: 700;
+    .ouc-affiliation {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      padding: 3px 12px 3px 6px;
+      border-radius: var(--radius-full);
+      color: var(--ink);
+      font-size: 0.92rem;
     }
 
-    .hero-links a:hover {
-      border-color: var(--warm);
-      color: var(--warm);
+    .ouc-affiliation img {
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+
+    /* Hero Actions Layout & Mobile Collapsible Button Group */
+    .hero-actions {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 10px;
+      position: relative;
+    }
+
+    .action-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 9px 18px;
+      border-radius: var(--radius-full);
+      font-size: 0.86rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: var(--transition-smooth);
+      cursor: pointer;
+      white-space: nowrap;
+    }
+
+    .action-btn.primary {
+      background: var(--action-primary-bg);
+      color: var(--action-primary-ink);
+      box-shadow: 0 4px 18px var(--accent-glow);
+      border: 1px solid transparent;
+    }
+
+    .action-btn.primary:hover {
+      background: var(--action-primary-hover);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px var(--accent-glow);
       text-decoration: none;
     }
 
-    .portrait {
-      width: 224px;
+    .action-btn.secondary {
+      background: var(--action-sec-bg);
+      color: var(--action-sec-ink);
+      border: 1px solid var(--action-sec-border);
     }
 
-    .portrait img {
+    .action-btn.secondary:hover {
+      background: var(--bg-card-hover);
+      color: var(--action-sec-hover);
+      border-color: var(--ink-dim);
+      transform: translateY(-2px);
+      text-decoration: none;
+    }
+
+    .hero-action-row {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    /* Expand / Collapse Group for Mobile Buttons (Wide screen: spread seamlessly) */
+    .hero-collapsible-group {
+      display: inline-flex;
+      align-items: center;
+    }
+
+    .hero-collapsible-inner {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .mobile-expand-btn {
+      display: none;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 14px;
+      border-radius: var(--radius-full);
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      color: var(--ink-dim);
+      font-size: 0.82rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: var(--transition-smooth);
+    }
+
+    .mobile-expand-btn:hover {
+      background: var(--bg-card-hover);
+      color: var(--accent);
+      border-color: var(--accent);
+    }
+
+    .mobile-expand-btn svg.chevron-icon {
+      transition: transform 0.3s ease;
+    }
+
+    .mobile-expand-btn.expanded svg.chevron-icon {
+      transform: rotate(180deg);
+    }
+
+    /* Portrait with 3D tilt & dynamic border */
+    .portrait-wrapper {
+      position: relative;
+      width: 230px;
+      margin: 0 auto;
+      perspective: 1000px;
+    }
+
+    .portrait-card {
+      position: relative;
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      box-shadow: var(--shadow-lg);
+      transition: transform 0.5s cubic-bezier(0.165, 0.84, 0.44, 1), box-shadow 0.5s ease;
+      transform-style: preserve-3d;
+      border: 2px solid var(--portrait-border);
+      background: var(--portrait-bg);
+    }
+
+    .portrait-card:hover {
+      transform: translateY(-6px) rotateX(4deg) rotateY(-4deg);
+      box-shadow: 0 30px 60px rgba(0, 0, 0, 0.25), 0 0 30px var(--accent-glow);
+      border-color: var(--accent);
+    }
+
+    .portrait-card img {
       display: block;
       width: 100%;
       aspect-ratio: 1;
       object-fit: cover;
-      filter: saturate(.86);
-      border: 8px solid rgba(255, 255, 255, .1);
+      filter: contrast(1.02);
+      transition: transform 0.6s ease;
     }
 
-    .portrait::before {
+    .portrait-card:hover img {
+      transform: scale(1.04);
+    }
+
+    /* Geometric decorative frame */
+    .portrait-wrapper::after {
       content: "";
       position: absolute;
+      top: -10px;
+      left: -10px;
+      right: -10px;
+      bottom: -10px;
+      border: 1px dashed var(--portrait-dashed);
+      border-radius: calc(var(--radius-lg) + 8px);
+      pointer-events: none;
       z-index: -1;
-      width: 100%;
-      height: 100%;
-      top: 17px;
-      left: 17px;
-      border: 1px solid var(--warm);
+      transition: transform 0.5s ease, border-color 0.5s ease;
     }
 
-    main {
-      max-width: 1160px;
-      margin: 0 auto 70px;
-      padding: 0 32px;
+    .portrait-wrapper:hover::after {
+      transform: scale(1.04);
+      border-color: var(--accent);
     }
 
+    /* Sections Shared Layout */
     .section {
-      padding: 48px 0;
-      border-top: 1px solid var(--line);
+      padding: 56px 0;
+      position: relative;
     }
 
-    .section:first-child {
-      border-top: 0;
-      padding-top: 0;
-    }
-
-    .section-heading {
+    .section-grid {
       display: grid;
-      grid-template-columns: 180px minmax(0, 1fr);
-      gap: 36px;
+      grid-template-columns: 200px minmax(0, 1fr);
+      gap: 48px;
     }
 
-    .section-label {
-      margin: 7px 0 0;
+    .section-meta {
+      position: sticky;
+      top: 100px;
+      align-self: start;
+    }
+
+    .section-number {
+      font-family: var(--font-mono);
+      font-size: 0.78rem;
+      font-weight: 600;
       color: var(--accent);
-      font-size: .75rem;
-      font-weight: 800;
-      letter-spacing: .15em;
+      letter-spacing: 0.16em;
       text-transform: uppercase;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin-bottom: 8px;
     }
 
-    h2 {
-      margin: 0 0 21px;
-      font-size: clamp(1.75rem, 3vw, 2.35rem);
-      line-height: 1.15;
-      letter-spacing: -.025em;
-    }
-
-    .section-content> :first-child {
-      margin-top: 0;
-    }
-
-    .section-content> :last-child {
-      margin-bottom: 0;
-    }
-
-    .section-content p {
-      max-width: 740px;
-      margin: 0 0 18px;
-    }
-
-    .facts {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      max-width: 700px;
-      margin: 27px 0 0;
-      border-top: 1px solid var(--line);
-    }
-
-    .fact {
-      padding: 14px 20px 12px 0;
-      border-bottom: 1px solid var(--line);
-    }
-
-    .fact:nth-child(even) {
-      padding-left: 20px;
-      padding-right: 0;
-    }
-
-    .fact-label {
-      display: block;
-      color: var(--muted);
-      font-size: .71rem;
-      font-weight: 800;
-      letter-spacing: .11em;
-      text-transform: uppercase;
-    }
-
-    .fact-value {
-      display: block;
-      margin-top: 3px;
-      font-size: .93rem;
-    }
-
-    .interests {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 1px;
-      max-width: 740px;
-      background: var(--line);
-      border: 1px solid var(--line);
-    }
-
-    .interest {
-      padding: 17px 20px;
-      background: var(--paper);
-    }
-
-    .interest strong {
-      display: block;
-      margin-bottom: 1px;
-      font-family: Georgia, "Times New Roman", serif;
-      font-size: 1.05rem;
-    }
-
-    .interest span {
-      color: var(--muted);
-      font-size: .91rem;
-    }
-
-    .publication-list {
-      margin: 0;
-      padding: 0;
-      list-style: none;
-    }
-
-    .publication {
-      padding: 0 0 28px;
-      margin-bottom: 28px;
-      border-bottom: 1px solid var(--line);
-    }
-
-    .publication:last-child {
-      padding-bottom: 0;
-      margin-bottom: 0;
-      border-bottom: 0;
-    }
-
-    .publication-title {
-      display: block;
-      margin-bottom: 7px;
+    .section-title {
+      font-family: var(--font-serif);
+      font-size: 2.2rem;
+      font-weight: 600;
       color: var(--ink);
-      font-family: Georgia, "Times New Roman", serif;
-      font-size: 1.2rem;
-      line-height: 1.4;
-      font-weight: 700;
+      line-height: 1.15;
+      letter-spacing: -0.02em;
     }
 
-    .publication-title:hover {
-      color: var(--accent-dark);
+    .section-content {
+      min-width: 0;
     }
 
-    .authors {
-      margin: 0 0 3px;
-      color: #455462;
-      font-size: .94rem;
-      line-height: 1.65;
+    .prose {
+      color: var(--ink-dim);
+      font-size: 1.04rem;
+      line-height: 1.82;
+      max-width: 760px;
     }
 
-    .venue {
-      margin: 0 0 10px;
-      color: var(--muted);
-      font-size: .9rem;
-      font-style: italic;
+    .prose p {
+      margin-bottom: 20px;
     }
 
-    .doi {
-      display: inline-block;
-      padding-bottom: 1px;
-      border-bottom: 1px solid currentColor;
-      font-size: .78rem;
-      font-weight: 800;
-      letter-spacing: .08em;
-      text-transform: uppercase;
+    .prose strong {
+      color: var(--ink);
+      font-weight: 600;
     }
 
-    .doi:hover {
+    .prose a {
+      color: var(--accent);
       text-decoration: none;
+      border-bottom: 1px solid var(--border-accent);
+      padding-bottom: 1px;
+      transition: border-color 0.2s, color 0.2s;
     }
 
+    .prose a:hover {
+      color: var(--accent-hover);
+      border-color: var(--accent);
+    }
+
+    /* Education Timeline Grid */
+    .education-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
+      margin-top: 32px;
+      max-width: 760px;
+    }
+
+    .edu-card {
+      position: relative;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 22px;
+      transition: var(--transition-smooth);
+      backdrop-filter: blur(10px);
+      overflow: hidden;
+    }
+
+    .edu-card:hover {
+      background: var(--bg-card-hover);
+      border-color: var(--border-accent);
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .edu-degree-tag {
+      display: inline-block;
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      font-weight: 700;
+      color: var(--accent-warm);
+      background: var(--accent-warm-soft);
+      border: 1px solid rgba(217, 119, 6, 0.25);
+      padding: 2px 8px;
+      border-radius: var(--radius-sm);
+      margin-bottom: 12px;
+    }
+
+    .edu-major {
+      font-size: 1.02rem;
+      font-weight: 600;
+      color: var(--ink);
+      margin-bottom: 4px;
+      line-height: 1.4;
+    }
+
+    .edu-school {
+      font-size: 0.9rem;
+      color: var(--ink-dim);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .edu-time {
+      font-family: var(--font-mono);
+      font-size: 0.78rem;
+      color: var(--ink-faint);
+      margin-top: 10px;
+    }
+
+    /* Interests Interactive Cards */
+    .interests-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+      max-width: 760px;
+    }
+
+    .interest-card {
+      position: relative;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 24px;
+      transition: var(--transition-smooth);
+      backdrop-filter: blur(10px);
+      cursor: default;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      overflow: hidden;
+    }
+
+    .interest-card::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 4px;
+      height: 0;
+      background: var(--accent);
+      transition: height 0.3s ease;
+    }
+
+    .interest-card:hover {
+      background: var(--bg-card-hover);
+      border-color: var(--border-accent);
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .interest-card:hover::before {
+      height: 100%;
+    }
+
+    .interest-icon-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 14px;
+    }
+
+    .interest-icon {
+      font-size: 1.8rem;
+      line-height: 1;
+      transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    .interest-card:hover .interest-icon {
+      transform: scale(1.2) rotate(6deg);
+    }
+
+    .interest-tag {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      color: var(--ink-faint);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .interest-title {
+      font-family: var(--font-serif);
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: var(--ink);
+      margin-bottom: 6px;
+    }
+
+    .interest-desc {
+      font-size: 0.92rem;
+      color: var(--ink-dim);
+      line-height: 1.6;
+    }
+
+    /* Publications List & Interactive Items */
+    .publications-container {
+      max-width: 820px;
+    }
+
+    .publications-filter {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 24px;
+      padding-bottom: 14px;
+      border-bottom: 1px solid var(--border);
+      flex-wrap: wrap;
+    }
+
+    .filter-label {
+      font-size: 0.82rem;
+      color: var(--ink-faint);
+      font-family: var(--font-mono);
+      margin-right: 6px;
+    }
+
+    .filter-chip {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      color: var(--ink-dim);
+      padding: 4px 12px;
+      border-radius: var(--radius-full);
+      font-size: 0.78rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: var(--transition-smooth);
+    }
+
+    .filter-chip:hover,
+    .filter-chip.active {
+      background: var(--accent-glow);
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    .publication-card {
+      position: relative;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 26px 28px;
+      margin-bottom: 20px;
+      transition: var(--transition-smooth);
+      backdrop-filter: blur(12px);
+    }
+
+    .publication-card:hover {
+      background: var(--bg-card-hover);
+      border-color: var(--border-accent);
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .pub-badges {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 10px;
+      flex-wrap: wrap;
+    }
+
+    .pub-year {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      font-weight: 600;
+      padding: 2px 8px;
+      border-radius: var(--radius-sm);
+      background: var(--accent-glow);
+      color: var(--accent);
+      border: 1px solid var(--border-accent);
+    }
+
+    .pub-type {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      padding: 2px 8px;
+      border-radius: var(--radius-sm);
+      background: var(--bg-subtle);
+      color: var(--ink-dim);
+      border: 1px solid var(--border);
+    }
+
+    .pub-title {
+      font-family: var(--font-serif);
+      font-size: 1.25rem;
+      line-height: 1.42;
+      font-weight: 600;
+      color: var(--ink);
+      margin-bottom: 10px;
+      text-decoration: none;
+      display: inline-block;
+      transition: color 0.2s;
+    }
+
+    .pub-title:hover {
+      color: var(--accent);
+    }
+
+    .pub-authors {
+      font-size: 0.94rem;
+      color: var(--ink-dim);
+      margin-bottom: 8px;
+      line-height: 1.6;
+    }
+
+    .pub-authors .author-highlight {
+      color: var(--ink);
+      font-weight: 600;
+      text-decoration: underline;
+      text-decoration-color: var(--accent-warm);
+      text-underline-offset: 3px;
+    }
+
+    .pub-venue {
+      font-size: 0.9rem;
+      color: var(--ink-faint);
+      font-style: italic;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .pub-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .pub-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 5px 12px;
+      border-radius: var(--radius-sm);
+      font-family: var(--font-mono);
+      font-size: 0.76rem;
+      font-weight: 600;
+      color: var(--ink-dim);
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      text-decoration: none;
+      cursor: pointer;
+      transition: var(--transition-smooth);
+    }
+
+    .pub-btn:hover {
+      background: var(--accent-glow);
+      border-color: var(--accent);
+      color: var(--accent);
+      text-decoration: none;
+      transform: translateY(-1px);
+    }
+
+    /* Interactive BibTeX Collapsible Drawer */
+    .bibtex-drawer {
+      margin-top: 14px;
+      background: var(--bibtex-bg);
+      border: 1px solid var(--bibtex-border);
+      border-radius: var(--radius-sm);
+      padding: 12px 14px;
+      font-family: var(--font-mono);
+      font-size: 0.74rem;
+      line-height: 1.5;
+      color: var(--bibtex-ink);
+      position: relative;
+      display: none;
+      max-height: 180px;
+      overflow-y: auto;
+    }
+
+    .bibtex-drawer.open {
+      display: block;
+      animation: fadeIn 0.25s ease-out;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(-4px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .copy-bib-btn {
+      position: absolute;
+      top: 8px;
+      right: 8px;
+      background: var(--copy-btn-bg);
+      border: 1px solid var(--border);
+      color: var(--ink-dim);
+      font-size: 0.68rem;
+      padding: 3px 8px;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .copy-bib-btn:hover {
+      color: var(--accent);
+      border-color: var(--accent);
+    }
+
+    /* Footer */
     .site-footer {
-      max-width: 1160px;
-      margin: 0 auto;
-      padding: 25px 32px 40px;
-      border-top: 1px solid var(--line);
-      color: var(--muted);
-      font-size: .82rem;
+      max-width: 1140px;
+      margin: 40px auto 0;
+      padding: 30px 24px 50px;
+      border-top: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      color: var(--ink-faint);
+      font-size: 0.85rem;
     }
 
-    @media (max-width:760px) {
-      .site-header {
-        padding: 17px 22px;
-      }
+    .footer-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
 
-      .site-nav {
-        gap: 14px;
-      }
+    .footer-right {
+      font-family: var(--font-mono);
+      font-size: 0.78rem;
+    }
 
-      .site-nav a {
-        font-size: .7rem;
-      }
+    /* Scroll animations */
+    .reveal {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+    }
 
-      .language-toggle { font-size: .66rem; }
+    .reveal.active {
+      opacity: 1;
+      transform: translateY(0);
+    }
 
+    /* =========================================================
+       RESPONSIVE & MOBILE ADAPTIVE BEHAVIOR
+       Desktop: Wide open layout with spread buttons
+       Mobile: Intelligent collapsible drawer & collapsed buttons
+       ========================================================= */
+
+    /* Tablet & Medium Breakpoint */
+    @media (max-width: 880px) {
       .hero {
-        min-height: 0;
-        margin-bottom: 30px;
-        padding: 46px 30px 50px;
         grid-template-columns: 1fr;
-        gap: 38px;
+        padding: 44px 32px;
+        gap: 36px;
+        text-align: left;
       }
 
-      .hero::after {
-        width: 320px;
-        height: 320px;
-        top: -225px;
-        right: -130px;
-      }
-
-      .portrait {
-        width: min(185px, 58vw);
-      }
-
-      main {
-        padding: 0 22px;
-        margin-bottom: 42px;
-      }
-
-      .section {
-        padding: 37px 0;
-      }
-
-      .section-heading {
-        grid-template-columns: 1fr;
-        gap: 13px;
-      }
-
-      .section-label {
+      .portrait-wrapper {
+        order: -1;
+        width: 170px;
         margin: 0;
       }
 
-      .facts,
-      .interests {
+      .section-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+
+      .section-meta {
+        position: static;
+      }
+
+      .education-grid,
+      .interests-grid {
         grid-template-columns: 1fr;
       }
 
-      .fact:nth-child(even) {
-        padding-left: 0;
-      }
-
       .site-footer {
-        padding: 22px 22px 31px;
+        flex-direction: column;
+        gap: 12px;
+        text-align: center;
       }
     }
 
-    @media (max-width:400px) {
+    /* Mobile Smartphone Breakpoint (≤ 768px):
+       Navigation shrinks to Mobile Drawer Menu */
+    @media (max-width: 768px) {
+      .site-header {
+        width: calc(100% - 24px);
+        top: 10px;
+        padding: 8px 14px;
+      }
+
       .site-nav {
-        gap: 11px;
+        display: none;
+        /* Hide wide spread menu links */
       }
 
-      .site-nav a {
-        letter-spacing: .04em;
+      .mobile-menu-btn {
+        display: flex;
+        /* Reveal collapsible hamburger button */
       }
 
-      .wordmark {
-        font-size: .93rem;
+      .mobile-nav-drawer {
+        display: flex;
+        /* Activated as dropdown card */
       }
 
+      .page-wrapper {
+        padding: 96px 18px 50px;
+      }
+    }
+
+    /* Smart Phone Narrow Width (≤ 640px):
+       Intelligent Button Collapsible Layout */
+    @media (max-width: 640px) {
       .hero {
-        padding-left: 24px;
-        padding-right: 24px;
+        padding: 34px 22px;
+        gap: 28px;
+        border-radius: var(--radius-md);
+      }
+
+      h1.hero-name {
+        font-size: 2.3rem;
+      }
+
+      .portrait-wrapper {
+        width: 140px;
+      }
+
+      /* Hero Buttons Shrink System:
+         Primary button remains immediate; Secondary spread buttons collapse into toggle */
+      .hero-actions {
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 10px;
+        width: 100%;
+      }
+
+      .hero-action-row {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        width: 100%;
+      }
+
+      .action-btn.primary {
+        flex: 1;
+        justify-content: center;
+        padding: 10px 16px;
+      }
+
+      .mobile-expand-btn {
+        display: inline-flex;
+        padding: 10px 14px;
+        justify-content: center;
+        white-space: nowrap;
+      }
+
+      /* Collapsed secondary links container */
+      .hero-collapsible-group {
+        display: grid;
+        grid-template-rows: 0fr;
+        transition: grid-template-rows 0.35s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease;
+        opacity: 0;
+        overflow: hidden;
+        width: 100%;
+        gap: 0;
+      }
+
+      .hero-collapsible-group.expanded {
+        grid-template-rows: 1fr;
+        opacity: 1;
+        margin-top: 4px;
+      }
+
+      .hero-collapsible-inner {
+        min-height: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+      }
+
+      .hero-collapsible-group .action-btn.secondary {
+        width: 100%;
+        justify-content: center;
+        padding: 9px 14px;
+      }
+
+      /* Publications filter responsive scroll */
+      .publications-filter {
+        overflow-x: auto;
+        flex-wrap: nowrap;
+        padding-bottom: 8px;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+      }
+
+      .publications-filter::-webkit-scrollbar {
+        display: none;
+      }
+
+      .publication-card {
+        padding: 20px 18px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .site-header {
+        width: calc(100% - 16px);
+        padding: 6px 12px;
+      }
+
+      .wordmark span.wm-text {
+        font-size: 1rem;
+      }
+
+      .header-controls {
+        gap: 6px;
+      }
+
+      .language-toggle {
+        padding: 4px 8px;
+        font-size: 0.7rem;
+        height: 32px;
+      }
+
+      .theme-toggle-btn,
+      .mobile-menu-btn {
+        width: 32px;
+        height: 32px;
+      }
+
+      .section-title {
+        font-size: 1.75rem;
+      }
+
+      .pub-title {
+        font-size: 1.12rem;
+      }
+
+      .pub-actions {
+        gap: 8px;
+      }
+
+      .pub-btn {
+        padding: 5px 10px;
+        font-size: 0.72rem;
       }
     }
   </style>
 </head>
 
 <body>
-  <header class="site-header"><a class="wordmark" href="#top">Naizhe Sun</a>
-    <nav class="site-nav" aria-label="Primary navigation" data-i18n-aria="navigation"><a href="#about" data-i18n="navAbout">About</a><a href="#interests" data-i18n="navInterests">Interests</a><a href="#publications" data-i18n="navPublications">Publications</a><button class="language-toggle" type="button" aria-label="切换至中文" data-i18n-aria="toggleLabel">中文</button></nav>
-  </header>
-  <section class="hero" id="top" aria-labelledby="name">
-    <div class="hero-content">
-      <p class="eyebrow" data-i18n="eyebrow">Personal Homepage</p>
-      <h1 id="name">Naizhe Sun <span class="chinese-name">孙乃哲</span></h1>
-      <p class="role" data-i18n="role">M.S. @Ocean University of China（中国海洋大学）</p>
-      <div class="hero-links"><a href="mailto:sunnaizhe@stu.ouc.edu.cn" data-i18n="email">Email</a><a href="https://github.com/snzknight">GitHub</a></div>
+  <!-- Reading Progress Bar -->
+  <div id="progress-bar"></div>
+
+  <!-- Ambient Dynamic Canvas -->
+  <canvas class="ambient-canvas" id="canvas-particles"></canvas>
+  <div class="ambient-glow ambient-glow-1"></div>
+  <div class="ambient-glow ambient-glow-2"></div>
+
+  <!-- Floating Back to Top Button -->
+  <button class="back-to-top" id="backToTop" aria-label="Back to top" title="Back to top">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+      stroke-linecap="round" stroke-linejoin="round">
+      <path d="M18 15l-6-6-6 6" />
+    </svg>
+  </button>
+
+  <!-- Sticky Glassmorphic Header -->
+  <header class="site-header" id="siteHeader">
+    <a class="wordmark" href="#top">
+      <span class="logo-dot"></span>
+      <span class="wm-text">Naizhe Sun</span>
+    </a>
+
+    <div class="nav-container">
+      <!-- Desktop Expanded Nav Links -->
+      <nav class="site-nav" id="siteNav" aria-label="Primary navigation" data-i18n-aria="navigation">
+        <div class="nav-indicator" id="navIndicator"></div>
+        <a href="#about" class="nav-link active" data-i18n="navAbout">About</a>
+        <a href="#interests" class="nav-link" data-i18n="navInterests">Interests</a>
+        <a href="#publications" class="nav-link" data-i18n="navPublications">Publications</a>
+      </nav>
+
+      <!-- Header Controls: Theme Toggle & Language Toggle & Mobile Hamburger -->
+      <div class="header-controls">
+        <!-- White / Black Theme Toggle Button (Light by default) -->
+        <button class="theme-toggle-btn" type="button" id="themeBtn" aria-label="Switch theme" title="Toggle theme">
+          <!-- Sun Icon (shown in dark theme) -->
+          <svg class="sun-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="5"></circle>
+            <line x1="12" y1="1" x2="12" y2="3"></line>
+            <line x1="12" y1="21" x2="12" y2="23"></line>
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+            <line x1="1" y1="12" x2="3" y2="12"></line>
+            <line x1="21" y1="12" x2="23" y2="12"></line>
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+          </svg>
+          <!-- Moon Icon (shown in light theme) -->
+          <svg class="moon-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+          </svg>
+        </button>
+
+        <!-- Bilingual Language Switch -->
+        <button class="language-toggle" type="button" aria-label="切换至中文" data-i18n-aria="toggleLabel" id="langBtn">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"></circle>
+            <line x1="2" y1="12" x2="22" y2="12"></line>
+            <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+          </svg>
+          <span id="langText">中 / EN</span>
+        </button>
+
+        <!-- Smartphone Hamburger Toggle Button -->
+        <button class="mobile-menu-btn" type="button" id="mobileMenuBtn" aria-label="Toggle navigation menu"
+          aria-expanded="false">
+          <span class="bar bar-1"></span>
+          <span class="bar bar-2"></span>
+        </button>
+      </div>
     </div>
-    <div class="portrait"><img src="./homepage_files/avatar.jpg" alt="Portrait of Naizhe Sun" data-i18n-alt="portraitAlt"></div>
-  </section>
-  <main>
-    <section class="section" id="about" aria-labelledby="about-title">
-      <div class="section-heading">
-        <p class="section-label" data-i18n="profileLabel">01 — Profile</p>
-        <div class="section-content">
-          <h2 id="about-title" data-i18n="aboutTitle">About</h2>
-          <p data-i18n-html="aboutOne">I am a master's graduate from the <a href="http://eweb.ouc.edu.cn/">College of Electronic Engineering, Ocean University of China</a>. I was supervised by Prof. <a href="https://ouc.ai/zhenghaiyong/flyzhygg/zhy.html">Haiyong Zheng</a>.</p>
-          <p data-i18n="aboutTwo">My graduate research focused on interactive applications of AI large models. I explored natural and efficient human–computer interaction approaches that strengthen models' perceptual and responsive capabilities and help bring them into practical settings. More broadly, my academic interests include deep learning and computer vision.</p>
-          <div class="facts" aria-label="Academic background" data-i18n-aria="academicBackground">
-            <div class="fact"><span class="fact-label" data-i18n="msLabel">M.S.</span><span class="fact-value" data-i18n="msDegree">Electronic Information Engineering, Ocean University of China · 2026</span></div>
-            <div class="fact"><span class="fact-label" data-i18n="bsLabel">B.S.</span><span class="fact-value" data-i18n="bsDegree">Communication Engineering, Qingdao University of Technology · 2023</span></div>
+
+    <!-- Mobile Navigation Drawer Dropdown -->
+    <div class="mobile-nav-drawer" id="mobileDrawer">
+      <a href="#about" class="mobile-nav-link" data-i18n="navAbout">About</a>
+      <a href="#interests" class="mobile-nav-link" data-i18n="navInterests">Interests</a>
+      <a href="#publications" class="mobile-nav-link" data-i18n="navPublications">Publications</a>
+    </div>
+  </header>
+
+  <div class="page-wrapper">
+    <!-- Hero Section -->
+    <section class="hero reveal" id="top" aria-labelledby="name">
+      <div class="hero-content">
+        <div class="eyebrow-badge">
+          <span class="live-signal"></span>
+          <span data-i18n="eyebrow">Personal Homepage</span>
+        </div>
+
+        <h1 class="hero-name" id="name">
+          Naizhe Sun <span class="chinese-name">孙乃哲</span>
+        </h1>
+
+        <div class="hero-role">
+          <span class="ouc-affiliation">
+            <img src="./homepage_files/ouc-logo.jpeg" alt="OUC logo">
+            <span data-i18n="roleAffil">M.S. @ Ocean University of China</span>
+          </span>
+          <span data-i18n="roleSub">· AI & Computer Vision</span>
+        </div>
+
+        <!-- Hero Actions: Desktop Spread / Mobile Collapsible -->
+        <div class="hero-actions">
+          <div class="hero-action-row">
+            <!-- Primary Contact Button -->
+            <a class="action-btn primary" href="mailto:sunnaizhe@stu.ouc.edu.cn">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <rect width="20" height="16" x="2" y="4" rx="2"></rect>
+                <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path>
+              </svg>
+              <span data-i18n="emailBtn">Get in Touch</span>
+            </a>
+
+            <!-- Mobile Shrink Trigger: Visible on narrow phone screens to toggle secondary links -->
+            <button class="mobile-expand-btn" id="heroExpandBtn" type="button" aria-expanded="false"
+              aria-controls="heroCollapsibleGroup">
+              <span class="expand-btn-text" data-i18n="expandLinks">More Links (2)</span>
+              <svg class="chevron-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="6 9 12 15 18 9"></polyline>
+              </svg>
+            </button>
+          </div>
+
+          <!-- Secondary Actions: Spread on wide screens, smoothly collapsed on narrow phones -->
+          <div class="hero-collapsible-group" id="heroCollapsibleGroup">
+            <div class="hero-collapsible-inner">
+              <a class="action-btn secondary" href="https://github.com/snzknight" target="_blank"
+                rel="noopener noreferrer">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <path
+                    d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4">
+                  </path>
+                  <path d="M9 18c-4.51 2-5-2-7-2"></path>
+                </svg>
+                GitHub
+              </a>
+              <a class="action-btn secondary" href="https://ouc.ai" target="_blank"
+                rel="noopener noreferrer">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path>
+                  <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path>
+                </svg>
+                <span data-i18n="labBtn">Lab Page</span>
+              </a>
+            </div>
           </div>
         </div>
       </div>
+
+      <!-- Interactive 3D Card Portrait -->
+      <div class="portrait-wrapper">
+        <div class="portrait-card" id="portraitCard">
+          <img src="./homepage_files/avatar.jpg" alt="Portrait of Naizhe Sun" data-i18n-alt="portraitAlt">
+        </div>
+      </div>
     </section>
-    <section class="section" id="interests" aria-labelledby="interests-title">
-      <div class="section-heading">
-        <p class="section-label" data-i18n="interestsLabel">02 — Beyond Research</p>
-        <div class="section-content">
-          <h2 id="interests-title" data-i18n="interestsTitle">Interests</h2>
-          <div class="interests">
-            <div class="interest"><strong data-i18n="photographyTitle">📷 Photography</strong><span data-i18n="photographyText">Collecting light, places, and everyday moments.</span></div>
-            <div class="interest"><strong data-i18n="editingTitle">🎬 Video Editing</strong><span data-i18n="editingText">Shaping concise stories through moving images.</span></div>
-            <div class="interest"><strong data-i18n="cyclingTitle">🚴‍♂️ Cycling</strong><span data-i18n="cyclingText">Exploring at an unhurried pace.</span></div>
-            <div class="interest"><strong data-i18n="swimmingTitle">🏊‍♂️ Swimming</strong><span data-i18n="swimmingText">Finding calm and balance in the water.</span></div>
+
+    <!-- Main Content -->
+    <main>
+      <!-- About Section -->
+      <section class="section reveal" id="about" aria-labelledby="about-title">
+        <div class="section-grid">
+          <div class="section-meta">
+            <div class="section-number">
+              <span>01</span>
+              <span>/</span>
+              <span data-i18n="profileLabel">Profile</span>
+            </div>
+            <h2 class="section-title" id="about-title" data-i18n="aboutTitle">About</h2>
+          </div>
+
+          <div class="section-content">
+            <div class="prose">
+              <p data-i18n-html="aboutOne">
+                I am a master's graduate from the <a href="https://it.ouc.edu.cn/ee/main.htm" target="_blank"
+                  rel="noopener noreferrer">College of Electronic Engineering,</a>
+                  <a
+                  href="https://it.ouc.edu.cn/ee/main.htm" target="_blank" rel="noopener noreferrer">Faculty of
+                  Information Science and Engineering,</a> <a href="https://it.ouc.edu.cn/main.htm" target="_blank"
+                  rel="noopener noreferrer">Ocean University of China</a> (OUC),
+                where I was fortunate to be supervised by Prof. <a href="https://ouc.ai/zhenghaiyong/flyzhygg/zhy.html"
+                  target="_blank" rel="noopener noreferrer">Haiyong Zheng</a>.
+              </p>
+              <p data-i18n="aboutTwo">
+                My graduate research focuses on interactive applications of AI large models,
+                exploring natural and efficient human–computer interaction approaches that strengthen models' perceptual
+                and responsive capabilities to deploy them into practical real-world settings. More broadly, my research
+                interests encompass deep learning and computer vision.
+              </p>
+            </div>
+
+            <!-- Education Timeline Cards -->
+            <div class="education-grid" aria-label="Education background">
+              <div class="edu-card">
+                <span class="edu-degree-tag" data-i18n="msTag">M.S. Degree</span>
+                <div class="edu-major" data-i18n="msMajor">Electronic Information Engineering</div>
+                <div class="edu-school" data-i18n="msSchool">Ocean University of China (中国海洋大学)</div>
+                <div class="edu-time">2023 — 2026</div>
+              </div>
+
+              <div class="edu-card">
+                <span class="edu-degree-tag" data-i18n="bsTag">B.S. Degree</span>
+                <div class="edu-major" data-i18n="bsMajor">Communication Engineering</div>
+                <div class="edu-school" data-i18n="bsSchool">Qingdao University of Technology (青岛理工大学)</div>
+                <div class="edu-time">2019 — 2023</div>
+              </div>
+            </div>
           </div>
         </div>
-      </div>
-    </section>
-    <section class="section" id="publications" aria-labelledby="publications-title">
-      <div class="section-heading">
-        <p class="section-label" data-i18n="publicationsLabel">03 — Selected Work</p>
-        <div class="section-content">
-          <h2 id="publications-title" data-i18n="publicationsTitle">Publications</h2>
-          <ol class="publication-list">
-            <li class="publication"><a class="publication-title" href="https://doi.org/10.1016/j.aquaculture.2025.743375" data-i18n="paperOneTitle">FishFaceID: A Deep Learning-based Non-Invasive System for Aquaculture Organism Individual Identification</a>
-              <p class="authors">Qinyue Zhang, Zhensheng Shi, Naizhe Sun, Yangfan Wang, Lingling Zhang, Bo Wang, Xiaogang Xun, Bing Zheng, Haiyong Zheng.</p>
-              <p class="venue" data-i18n="paperOneVenue">Aquaculture, 2025</p><a class="doi" href="https://doi.org/10.1016/j.aquaculture.2025.743375">DOI</a> <a class="doi" href="http://ouc.ai/project/FishFaceID" data-i18n="project">Project</a>
-            </li>
-            <li class="publication"><a class="publication-title" href="https://doi.org/10.1007/978-981-96-5373-7_15" data-i18n="paperTwoTitle">OUC-MOI-ID: A Benchmark Dataset for Marine Organism Individual Identification</a>
-              <p class="authors">Qinyue Zhang, Zhensheng Shi, Naizhe Sun, Yangfan Wang, Lingling Zhang, Bing Zheng, Haiyong Zheng.</p>
-              <p class="venue" data-i18n="paperTwoVenue">Proceedings of the First International Conference on Advanced Robotics, Control, and Artificial Intelligence (ICARCAI 2024)</p><a class="doi" href="https://doi.org/10.1007/978-981-96-5373-7_15">DOI</a>
-            </li>
-            <li class="publication"><a class="publication-title" href="https://doi.org/10.1007/s44295-024-00051-2" data-i18n="paperThreeTitle">MCAD-MM: A Benchmark Dataset and Method for Multi-Channel Acoustic Detection of Marine Mammals</a>
-              <p class="authors">Nan Li, Zhensheng Shi, Yuqi Shao, Naizhe Sun, Bing Zheng, Haiyong Zheng.</p>
-              <p class="venue" data-i18n="paperThreeVenue">Intelligent Marine Technology and Systems, 2025</p><a class="doi" href="https://doi.org/10.1007/s44295-024-00051-2">DOI</a>
-            </li>
-          </ol>
+      </section>
+
+      <!-- Interests Section -->
+      <section class="section reveal" id="interests" aria-labelledby="interests-title">
+        <div class="section-grid">
+          <div class="section-meta">
+            <div class="section-number">
+              <span>02</span>
+              <span>/</span>
+              <span data-i18n="interestsLabel">Beyond</span>
+            </div>
+            <h2 class="section-title" id="interests-title" data-i18n="interestsTitle">Interests</h2>
+          </div>
+
+          <div class="section-content">
+            <div class="interests-grid">
+              <div class="interest-card">
+                <div class="interest-icon-row">
+                  <span class="interest-icon">📷</span>
+                  <span class="interest-tag">Visuals</span>
+                </div>
+                <div>
+                  <h3 class="interest-title" data-i18n="photographyTitle">Photography</h3>
+                  <p class="interest-desc" data-i18n="photographyText">Collecting light, geometry, places, and fleeting
+                    everyday moments.</p>
+                </div>
+              </div>
+
+              <div class="interest-card">
+                <div class="interest-icon-row">
+                  <span class="interest-icon">🎬</span>
+                  <span class="interest-tag">Motion</span>
+                </div>
+                <div>
+                  <h3 class="interest-title" data-i18n="editingTitle">Video Editing</h3>
+                  <p class="interest-desc" data-i18n="editingText">Shaping rhythmic, concise stories through dynamic
+                    moving images.</p>
+                </div>
+              </div>
+
+              <div class="interest-card">
+                <div class="interest-icon-row">
+                  <span class="interest-icon">🚴‍♂️</span>
+                  <span class="interest-tag">Outdoor</span>
+                </div>
+                <div>
+                  <h3 class="interest-title" data-i18n="cyclingTitle">Cycling</h3>
+                  <p class="interest-desc" data-i18n="cyclingText">Exploring coastal roads and urban landscapes at an
+                    unhurried pace.</p>
+                </div>
+              </div>
+
+              <div class="interest-card">
+                <div class="interest-icon-row">
+                  <span class="interest-icon">🏊‍♂️</span>
+                  <span class="interest-tag">Calm</span>
+                </div>
+                <div>
+                  <h3 class="interest-title" data-i18n="swimmingTitle">Swimming</h3>
+                  <p class="interest-desc" data-i18n="swimmingText">Finding balance, rhythm, and tranquility underwater.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
+      </section>
+
+      <!-- Publications Section -->
+      <section class="section reveal" id="publications" aria-labelledby="publications-title">
+        <div class="section-grid">
+          <div class="section-meta">
+            <div class="section-number">
+              <span>03</span>
+              <span>/</span>
+              <span data-i18n="publicationsLabel">Research</span>
+            </div>
+            <h2 class="section-title" id="publications-title" data-i18n="publicationsTitle">Publications</h2>
+          </div>
+
+          <div class="section-content publications-container">
+            <!-- Filter chips -->
+            <div class="publications-filter">
+              <span class="filter-label">Filter:</span>
+              <button class="filter-chip active" data-filter="all">All (3)</button>
+              <button class="filter-chip" data-filter="journal">Journal</button>
+              <button class="filter-chip" data-filter="conference">Conference</button>
+            </div>
+
+            <!-- Paper 1 -->
+            <article class="publication-card" data-category="journal">
+              <div class="pub-badges">
+                <span class="pub-year">2025</span>
+                <span class="pub-type">Aquaculture (Elsevier)</span>
+              </div>
+              <a class="pub-title" href="https://doi.org/10.1016/j.aquaculture.2025.743375" target="_blank"
+                rel="noopener noreferrer" data-i18n="paperOneTitle">
+                FishFaceID: A Deep Learning-based Non-Invasive System for Aquaculture Organism Individual Identification
+              </a>
+              <p class="pub-authors">
+                Qinyue Zhang, Zhensheng Shi, <span class="author-highlight">Naizhe Sun</span>, Yangfan Wang, Lingling
+                Zhang, Bo Wang, Xiaogang Xun, Bing Zheng, Haiyong Zheng.
+              </p>
+              <p class="pub-venue" data-i18n="paperOneVenue">
+                Aquaculture, Vol. 613, Article 743375, 2025
+              </p>
+              <div class="pub-actions">
+                <a class="pub-btn" href="https://doi.org/10.1016/j.aquaculture.2025.743375" target="_blank"
+                  rel="noopener noreferrer">
+                  <span>DOI</span>
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                    <polyline points="15 3 21 3 21 9"></polyline>
+                    <line x1="10" y1="14" x2="21" y2="3"></line>
+                  </svg>
+                </a>
+                <a class="pub-btn" href="http://ouc.ai/project/FishFaceID" target="_blank" rel="noopener noreferrer">
+                  <span data-i18n="projectBtn">Project</span>
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <line x1="2" y1="12" x2="22" y2="12"></line>
+                    <path
+                      d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z">
+                    </path>
+                  </svg>
+                </a>
+                <button class="pub-btn bib-toggle" type="button" data-target="bib1">
+                  <span>BibTeX</span>
+                </button>
+              </div>
+
+              <!-- Collapsible BibTeX -->
+              <div class="bibtex-drawer" id="bib1">
+                <button class="copy-bib-btn">Copy</button>
+                <pre><code>@article{zhang2025fishfaceid,
+  title={FishFaceID: A deep learning-based non-invasive system for aquaculture organism individual identification},
+  author={Zhang, Qinyue and Shi, Zhensheng and Sun, Naizhe and Wang, Yangfan and Zhang, Lingling and Wang, Bo and Xun, Xiaogang and Zheng, Bing and Zheng, Haiyong},
+  journal={Aquaculture},
+  volume={613},
+  pages={743375},
+  year={2025},
+  publisher={Elsevier},
+  doi={10.1016/j.aquaculture.2025.743375}
+}</code></pre>
+              </div>
+            </article>
+
+            <!-- Paper 2 -->
+            <article class="publication-card" data-category="conference">
+              <div class="pub-badges">
+                <span class="pub-year">2024</span>
+                <span class="pub-type">Conference</span>
+              </div>
+              <a class="pub-title" href="https://doi.org/10.1007/978-981-96-5373-7_15" target="_blank"
+                rel="noopener noreferrer" data-i18n="paperTwoTitle">
+                OUC-MOI-ID: A Benchmark Dataset for Marine Organism Individual Identification
+              </a>
+              <p class="pub-authors">
+                Qinyue Zhang, Zhensheng Shi, <span class="author-highlight">Naizhe Sun</span>, Yangfan Wang, Lingling
+                Zhang, Bing Zheng, Haiyong Zheng.
+              </p>
+              <p class="pub-venue" data-i18n="paperTwoVenue">
+                Proceedings of the 1st International Conference on Advanced Robotics, Control, and Artificial
+                Intelligence (ICARCAI 2024)
+              </p>
+              <div class="pub-actions">
+                <a class="pub-btn" href="https://doi.org/10.1007/978-981-96-5373-7_15" target="_blank"
+                  rel="noopener noreferrer">
+                  <span>DOI</span>
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                    <polyline points="15 3 21 3 21 9"></polyline>
+                    <line x1="10" y1="14" x2="21" y2="3"></line>
+                  </svg>
+                </a>
+                <button class="pub-btn bib-toggle" type="button" data-target="bib2">
+                  <span>BibTeX</span>
+                </button>
+              </div>
+
+              <!-- Collapsible BibTeX -->
+              <div class="bibtex-drawer" id="bib2">
+                <button class="copy-bib-btn">Copy</button>
+                <pre><code>@inproceedings{zhang2024oucmoi,
+  title={OUC-MOI-ID: A Benchmark Dataset for Marine Organism Individual Identification},
+  author={Zhang, Qinyue and Shi, Zhensheng and Sun, Naizhe and Wang, Yangfan and Zhang, Lingling and Zheng, Bing and Zheng, Haiyong},
+  booktitle={Proceedings of the 1st International Conference on Advanced Robotics, Control, and Artificial Intelligence (ICARCAI 2024)},
+  doi={10.1007/978-981-96-5373-7_15},
+  year={2024}
+}</code></pre>
+              </div>
+            </article>
+
+            <!-- Paper 3 -->
+            <article class="publication-card" data-category="journal">
+              <div class="pub-badges">
+                <span class="pub-year">2025</span>
+                <span class="pub-type">Intelligent Marine Tech</span>
+              </div>
+              <a class="pub-title" href="https://doi.org/10.1007/s44295-024-00051-2" target="_blank"
+                rel="noopener noreferrer" data-i18n="paperThreeTitle">
+                MCAD-MM: A Benchmark Dataset and Method for Multi-Channel Acoustic Detection of Marine Mammals
+              </a>
+              <p class="pub-authors">
+                Nan Li, Zhensheng Shi, Yuqi Shao, <span class="author-highlight">Naizhe Sun</span>, Bing Zheng, Haiyong
+                Zheng.
+              </p>
+              <p class="pub-venue" data-i18n="paperThreeVenue">
+                Intelligent Marine Technology and Systems, 2025
+              </p>
+              <div class="pub-actions">
+                <a class="pub-btn" href="https://doi.org/10.1007/s44295-024-00051-2" target="_blank"
+                  rel="noopener noreferrer">
+                  <span>DOI</span>
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                    <polyline points="15 3 21 3 21 9"></polyline>
+                    <line x1="10" y1="14" x2="21" y2="3"></line>
+                  </svg>
+                </a>
+                <button class="pub-btn bib-toggle" type="button" data-target="bib3">
+                  <span>BibTeX</span>
+                </button>
+              </div>
+
+              <!-- Collapsible BibTeX -->
+              <div class="bibtex-drawer" id="bib3">
+                <button class="copy-bib-btn">Copy</button>
+                <pre><code>@article{li2025mcadmm,
+  title={MCAD-MM: A Benchmark Dataset and Method for Multi-Channel Acoustic Detection of Marine Mammals},
+  author={Li, Nan and Shi, Zhensheng and Shao, Yuqi and Sun, Naizhe and Zheng, Bing and Zheng, Haiyong},
+  journal={Intelligent Marine Technology and Systems},
+  volume={3},
+  pages={1--14},
+  year={2025},
+  publisher={Springer},
+  doi={10.1007/s44295-024-00051-2}
+}</code></pre>
+              </div>
+            </article>
+
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+      <div class="footer-left">
+        <span>© <span id="year"></span> Naizhe Sun</span>
+        <span>·</span>
+        <span data-i18n="location">Qingdao, China</span>
       </div>
-    </section>
-  </main>
-  <footer class="site-footer">© <span id="year"></span> Naizhe Sun · <span data-i18n="location">Qingdao, China</span></footer>
+      <div class="footer-right">
+        <span>Designed with precision & care</span>
+      </div>
+    </footer>
+  </div>
+
   <script>
+    // i18n Bilingual Content
     const translations = {
       en: {
-        pageTitle: 'Naizhe Sun (孙乃哲) | Personal Homepage', navigation: 'Primary navigation', toggleLabel: 'Switch to Chinese', navAbout: 'About', navInterests: 'Interests', navPublications: 'Pubs', eyebrow: 'Personal Homepage', role: 'M.S. @OUC（中国海洋大学）', email: 'Email', portraitAlt: 'Portrait of Naizhe Sun', profileLabel: '01 — Profile', aboutTitle: 'About', aboutOne: 'I am a master\'s graduate from the <a href="https://it.ouc.edu.cn/fise/">College of Electronic Engineering</a>, <a href="http://eweb.ouc.edu.cn/">Ocean University of China</a>. I was supervised by <a href="https://ouc.ai/zhenghaiyong/flyzhygg/zhy.html">Prof. Haiyong Zheng</a>.', aboutTwo: 'My graduate research focused on interactive applications of AI large models. I explored natural and efficient human–computer interaction approaches that strengthen models\' perceptual and responsive capabilities and help bring them into practical settings. More broadly, my academic interests include deep learning and computer vision.', academicBackground: 'Academic background', msLabel: 'M.S.', msDegree: 'Electronic Information Engineering, Ocean University of China · 2026', bsLabel: 'B.S.', bsDegree: 'Communication Engineering, Qingdao University of Technology · 2023', interestsLabel: '02 — Beyond Research', interestsTitle: 'Interests', photographyTitle: '📷 Photography', photographyText: 'Collecting light, places, and everyday moments.', editingTitle: '🎬 Video Editing', editingText: 'Shaping concise stories through moving images.', cyclingTitle: '🚴‍♂️ Cycling', cyclingText: 'Exploring at an unhurried pace.', swimmingTitle: '🏊‍♂️ Swimming', swimmingText: 'Finding calm and balance in the water.', publicationsLabel: '03 — Selected Work', publicationsTitle: 'Publications', paperOneTitle: 'FishFaceID: A Deep Learning-based Non-Invasive System for Aquaculture Organism Individual Identification', paperOneVenue: 'Aquaculture, 2025', project: 'Project', paperTwoTitle: 'OUC-MOI-ID: A Benchmark Dataset for Marine Organism Individual Identification', paperTwoVenue: 'Proceedings of the First International Conference on Advanced Robotics, Control, and Artificial Intelligence (ICARCAI 2024)', paperThreeTitle: 'MCAD-MM: A Benchmark Dataset and Method for Multi-Channel Acoustic Detection of Marine Mammals', paperThreeVenue: 'Intelligent Marine Technology and Systems, 2025', location: 'Qingdao, China'
+        pageTitle: 'Naizhe Sun (孙乃哲) | Personal Homepage',
+        navigation: 'Primary navigation',
+        toggleLabel: 'Switch to Chinese',
+        navAbout: 'About',
+        navInterests: 'Interests',
+        navPublications: 'Publications',
+        eyebrow: 'Personal Homepage',
+        roleAffil: 'M.S. @ Ocean University of China',
+        roleSub: '· AI & Computer Vision',
+        emailBtn: 'Get in Touch',
+        expandLinks: 'More Links (2)',
+        collapseLinks: 'Collapse',
+        labBtn: 'Lab Group',
+        portraitAlt: 'Portrait of Naizhe Sun',
+        profileLabel: 'Profile',
+        aboutTitle: 'About',
+        aboutOne: 'I am a master\'s graduate from the <a href="https://it.ouc.edu.cn/ee/main.htm" target="_blank" rel="noopener noreferrer">College of Electronic Engineering,</a> <a href="https://it.ouc.edu.cn/main.htm" target="_blank" rel="noopener noreferrer">Faculty of Information Science and Engineering,</a> <a href="https://www.ouc.edu.cn/" target="_blank" rel="noopener noreferrer"> Ocean University of China(OUC)</a>, where I was fortunate to be supervised by <a href="https://ouc.ai/zhenghaiyong/flyzhygg/zhy.html" target="_blank" rel="noopener noreferrer">Prof. Haiyong Zheng</a>.',
+        aboutTwo: 'My graduate research focuses on interactive applications of AI large models, exploring natural and efficient human–computer interaction approaches that strengthen models\' perceptual and responsive capabilities to deploy them into practical real-world settings. More broadly, my research interests encompass deep learning and computer vision.',
+        msTag: 'M.S. Degree',
+        msMajor: 'Electronic Information Engineering',
+        msSchool: 'Ocean University of China',
+        bsTag: 'B.S. Degree',
+        bsMajor: 'Communication Engineering',
+        bsSchool: 'Qingdao University of Technology',
+        interestsLabel: 'Beyond',
+        interestsTitle: 'Interests',
+        photographyTitle: 'Photography',
+        photographyText: 'Collecting light, geometry, places, and fleeting everyday moments.',
+        editingTitle: 'Video Editing',
+        editingText: 'Shaping rhythmic, concise stories through dynamic moving images.',
+        cyclingTitle: 'Cycling',
+        cyclingText: 'Exploring coastal roads and urban landscapes at an unhurried pace.',
+        swimmingTitle: 'Swimming',
+        swimmingText: 'Finding balance, rhythm, and tranquility underwater.',
+        publicationsLabel: 'Research',
+        publicationsTitle: 'Publications',
+        paperOneTitle: 'FishFaceID: A Deep Learning-based Non-Invasive System for Aquaculture Organism Individual Identification',
+        paperOneVenue: 'Aquaculture, Vol. 613, Article 743375, 2025',
+        projectBtn: 'Project',
+        paperTwoTitle: 'OUC-MOI-ID: A Benchmark Dataset for Marine Organism Individual Identification',
+        paperTwoVenue: 'Proceedings of the 1st International Conference on Advanced Robotics, Control, and Artificial Intelligence (ICARCAI 2024)',
+        paperThreeTitle: 'MCAD-MM: A Benchmark Dataset and Method for Multi-Channel Acoustic Detection of Marine Mammals',
+        paperThreeVenue: 'Intelligent Marine Technology and Systems, 2025',
+        location: 'Qingdao, China',
+        themeLightTip: 'Switch to dark theme',
+        themeDarkTip: 'Switch to light theme'
       },
       zh: {
-        pageTitle: '孙乃哲 | 个人主页', navigation: '主导航', toggleLabel: 'Switch to English', navAbout: '简介', navInterests: '兴趣', navPublications: '论文', eyebrow: '个人主页', role: '新一代电子信息技术｜硕士 @中国海洋大学', email: '邮箱', portraitAlt: '孙乃哲的肖像照', profileLabel: '01 — 个人简介', aboutTitle: '简介', aboutOne: '我毕业于<a href="https://www.ouc.edu.cn/">中国海洋大学</a><a href="https://it.ouc.edu.cn/">电子工程学院</a>，师从<a href="https://ouc.ai/zhenghaiyong/flyzhygg/zhy.html">郑海永教授</a>。', aboutTwo: '我的硕士研究聚焦于 AI 大模型的交互式应用，探索自然、高效的人机交互方式，以提升模型的感知与响应能力，并推动其在实际场景中的应用。此外，我的学术兴趣还包括深度学习与计算机视觉。', academicBackground: '教育背景', msLabel: '硕士', msDegree: '新一代电子信息技术，中国海洋大学 · 2026', bsLabel: '学士', bsDegree: '通信工程，青岛理工大学 · 2023', interestsLabel: '02 — 研究之外', interestsTitle: '兴趣爱好', photographyTitle: '📷 摄影', photographyText: '收集光影、地点与日常瞬间。', editingTitle: '🎬 视频剪辑', editingText: '用动态影像讲述简洁的故事。', cyclingTitle: '🚴‍♂️ 骑行', cyclingText: '以从容的节奏探索世界。', swimmingTitle: '🏊‍♂️ 游泳', swimmingText: '在水中寻找平静与平衡。', publicationsLabel: '03 — 代表成果', publicationsTitle: '论文发表', paperOneTitle: 'FishFaceID：基于深度学习的水产养殖生物个体无创识别系统', paperOneVenue: 'Aquaculture，2025', project: '项目', paperTwoTitle: 'OUC-MOI-ID：海洋生物个体识别基准数据集', paperTwoVenue: 'Proceedings of the First International Conference on Advanced Robotics, Control, and Artificial Intelligence (ICARCAI 2024)', paperThreeTitle: 'MCAD-MM：多通道海洋哺乳动物声学检测基准数据集与方法', paperThreeVenue: 'Intelligent Marine Technology and Systems，2025', location: '中国·青岛'
+        pageTitle: '孙乃哲 | 个人主页',
+        navigation: '主导航',
+        toggleLabel: '切换为英文 (English)',
+        navAbout: '简介',
+        navInterests: '兴趣爱好',
+        navPublications: '论文发表',
+        eyebrow: '个人主页',
+        roleAffil: '硕士 @ 中国海洋大学',
+        roleSub: '· 人工智能与计算机视觉',
+        emailBtn: '联系我',
+        expandLinks: '更多链接 (2)',
+        collapseLinks: '收起链接',
+        labBtn: '课题组主页',
+        portraitAlt: '孙乃哲的个人肖像',
+        profileLabel: '个人简介',
+        aboutTitle: '个人简介',
+        aboutOne: '我硕士毕业于<a href="https://www.ouc.edu.cn/" target="_blank" rel="noopener noreferrer">中国海洋大学</a> <a href="https://it.ouc.edu.cn/main.htm" target="_blank" rel="noopener noreferrer">信息科学与工程学部</a> <a href="https://www.ouc.edu.cn/" target="_blank" rel="noopener noreferrer">电子工程学院</a>，师从<a href="https://it.ouc.edu.cn/ee/main.htm" target="_blank" rel="noopener noreferrer">郑海永教授</a>。',
+        aboutTwo: '我的硕士阶段主要研究方向为 AI 大模型的交互式应用，致力于探索自然、高效的人机交互范式，以增强模型的感知与实时响应能力，推进大模型在真实场景中的有效落地。更广泛的研究兴趣涵盖深度学习与计算机视觉。',
+        msTag: '硕士研究生',
+        msMajor: '新一代电子信息技术',
+        msSchool: '中国海洋大学 · 2023 - 2026',
+        bsTag: '工学学士',
+        bsMajor: '通信工程',
+        bsSchool: '青岛理工大学 · 2019 - 2023',
+        interestsLabel: '生活之余',
+        interestsTitle: '兴趣爱好',
+        photographyTitle: '摄影',
+        photographyText: '定格光影、几何结构与生活中的闪光瞬间。',
+        editingTitle: '剪辑',
+        editingText: '通过富有韵律的镜头剪辑讲述简洁生动的故事。',
+        cyclingTitle: '骑行',
+        cyclingText: '以从容节奏穿行于沿海公路与城市风物之间。',
+        swimmingTitle: '游泳',
+        swimmingText: '在池水与浪涛中感受平静、节奏与身心平衡。',
+        publicationsLabel: '论文成果',
+        publicationsTitle: '论文发表',
+        paperOneTitle: 'FishFaceID: 基于深度学习的水产养殖生物个体无创识别系统',
+        paperOneVenue: 'Aquaculture (中科院一区 Top), Vol. 613, Article 743375, 2025',
+        projectBtn: '项目主页',
+        paperTwoTitle: 'OUC-MOI-ID: 海洋生物个体识别基准数据集',
+        paperTwoVenue: 'Proceedings of ICARCAI 2024 (机器人、控制与人工智能国际会议)',
+        paperThreeTitle: 'MCAD-MM: 用于海洋哺乳动物多通道声学检测的基准数据集与方法',
+        paperThreeVenue: 'Intelligent Marine Technology and Systems, 2025',
+        location: '中国 · 青岛',
+        themeLightTip: '切换为暗黑模式',
+        themeDarkTip: '切换为浅白模式'
       }
     };
 
-    const toggle = document.querySelector('.language-toggle');
-    const setLanguage = (language) => {
-      const copy = translations[language];
-      document.documentElement.lang = language === 'zh' ? 'zh-CN' : 'en';
-      document.title = copy.pageTitle;
-      document.querySelectorAll('[data-i18n]').forEach((element) => { element.textContent = copy[element.dataset.i18n]; });
-      document.querySelectorAll('[data-i18n-html]').forEach((element) => { element.innerHTML = copy[element.dataset.i18nHtml]; });
-      document.querySelectorAll('[data-i18n-aria]').forEach((element) => { element.setAttribute('aria-label', copy[element.dataset.i18nAria]); });
-      document.querySelectorAll('[data-i18n-alt]').forEach((element) => { element.alt = copy[element.dataset.i18nAlt]; });
-      toggle.textContent = language === 'zh' ? 'EN' : '中文';
-      document.getElementById('year').textContent = new Date().getFullYear();
-    };
+    let currentLang = 'en';
 
-    toggle.addEventListener('click', () => setLanguage(document.documentElement.lang === 'zh-CN' ? 'en' : 'zh'));
+    // Theme Toggle Functionality (Light as default)
+    const themeBtn = document.getElementById('themeBtn');
+
+    function applyTheme(theme) {
+      document.documentElement.setAttribute('data-theme', theme);
+      localStorage.setItem('theme', theme);
+      const isDark = theme === 'dark';
+      const tooltip = isDark ? translations[currentLang].themeDarkTip : translations[currentLang].themeLightTip;
+      themeBtn.setAttribute('title', tooltip);
+      themeBtn.setAttribute('aria-label', tooltip);
+    }
+
+    themeBtn.addEventListener('click', () => {
+      const currentTheme = document.documentElement.getAttribute('data-theme') || 'light';
+      const targetTheme = currentTheme === 'dark' ? 'light' : 'dark';
+      applyTheme(targetTheme);
+    });
+
+    // Language Toggle Functionality
+    const langBtn = document.getElementById('langBtn');
+    const langText = document.getElementById('langText');
+
+    function setLanguage(lang) {
+      currentLang = lang;
+      const data = translations[lang];
+      document.documentElement.lang = lang === 'zh' ? 'zh-CN' : 'en';
+      document.title = data.pageTitle;
+
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.dataset.i18n;
+        if (data[key]) el.textContent = data[key];
+      });
+
+      document.querySelectorAll('[data-i18n-html]').forEach(el => {
+        const key = el.dataset.i18nHtml;
+        if (data[key]) el.innerHTML = data[key];
+      });
+
+      document.querySelectorAll('[data-i18n-aria]').forEach(el => {
+        const key = el.dataset.i18nAria;
+        if (data[key]) el.setAttribute('aria-label', data[key]);
+      });
+
+      document.querySelectorAll('[data-i18n-alt]').forEach(el => {
+        const key = el.dataset.i18nAlt;
+        if (data[key]) el.alt = data[key];
+      });
+
+      langText.textContent = lang === 'zh' ? 'EN' : '中文';
+      document.getElementById('year').textContent = new Date().getFullYear();
+
+      // Update button text for mobile expander if needed
+      updateExpanderButtonText();
+
+      // Update theme button tooltip for the new language
+      const currentTheme = document.documentElement.getAttribute('data-theme') || 'light';
+      const tooltip = currentTheme === 'dark' ? data.themeDarkTip : data.themeLightTip;
+      themeBtn.setAttribute('title', tooltip);
+      themeBtn.setAttribute('aria-label', tooltip);
+
+      // Re-align nav indicator
+      updateActiveNav();
+    }
+
+    langBtn.addEventListener('click', () => {
+      const target = currentLang === 'zh' ? 'en' : 'zh';
+      setLanguage(target);
+    });
+
+    // Mobile Hamburger Menu Navigation Toggle
+    const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+    const mobileDrawer = document.getElementById('mobileDrawer');
+
+    function toggleMobileMenu(open) {
+      const shouldOpen = open !== undefined ? open : !mobileDrawer.classList.contains('open');
+      mobileMenuBtn.classList.toggle('open', shouldOpen);
+      mobileDrawer.classList.toggle('open', shouldOpen);
+      mobileMenuBtn.setAttribute('aria-expanded', shouldOpen ? 'true' : 'false');
+    }
+
+    mobileMenuBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      toggleMobileMenu();
+    });
+
+    // Close mobile menu when tapping a link
+    document.querySelectorAll('.mobile-nav-link').forEach(link => {
+      link.addEventListener('click', () => {
+        toggleMobileMenu(false);
+      });
+    });
+
+    // Close menu when tapping outside
+    document.addEventListener('click', (e) => {
+      if (!siteHeader.contains(e.target)) {
+        toggleMobileMenu(false);
+      }
+    });
+
+    // Mobile Smart Phone Action Buttons Shrink & Expand
+    const heroExpandBtn = document.getElementById('heroExpandBtn');
+    const heroCollapsibleGroup = document.getElementById('heroCollapsibleGroup');
+    const expandBtnText = heroExpandBtn ? heroExpandBtn.querySelector('.expand-btn-text') : null;
+
+    function updateExpanderButtonText() {
+      if (!expandBtnText) return;
+      const isExpanded = heroCollapsibleGroup.classList.contains('expanded');
+      const data = translations[currentLang];
+      expandBtnText.textContent = isExpanded ? data.collapseLinks : data.expandLinks;
+    }
+
+    if (heroExpandBtn) {
+      heroExpandBtn.addEventListener('click', () => {
+        const isExpanded = heroCollapsibleGroup.classList.toggle('expanded');
+        heroExpandBtn.classList.toggle('expanded', isExpanded);
+        heroExpandBtn.setAttribute('aria-expanded', isExpanded ? 'true' : 'false');
+        updateExpanderButtonText();
+      });
+    }
+
+    // Reading Progress & Header Scroll state
+    const progressBar = document.getElementById('progress-bar');
+    const backToTop = document.getElementById('backToTop');
+    const siteHeader = document.getElementById('siteHeader');
+
+    window.addEventListener('scroll', () => {
+      const scrollTop = window.scrollY || document.documentElement.scrollTop;
+      const docHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      const scrollPercent = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+
+      progressBar.style.width = scrollPercent + '%';
+
+      if (scrollTop > 240) {
+        backToTop.classList.add('visible');
+        siteHeader.classList.add('scrolled');
+      } else {
+        backToTop.classList.remove('visible');
+        siteHeader.classList.remove('scrolled');
+      }
+
+      updateActiveNav();
+    });
+
+    backToTop.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    // Navigation Floating Pill & Active Spy
+    const navLinks = document.querySelectorAll('.site-nav .nav-link');
+    const navIndicator = document.getElementById('navIndicator');
+    const sections = document.querySelectorAll('section[id]');
+
+    function positionIndicator(link) {
+      if (!link || !navIndicator) return;
+      if (window.innerWidth <= 768) {
+        navIndicator.style.opacity = '0';
+        return;
+      }
+      navIndicator.style.opacity = '1';
+      navIndicator.style.width = `${link.offsetWidth}px`;
+      navIndicator.style.left = `${link.offsetLeft}px`;
+    }
+
+    function updateActiveNav() {
+      let currentId = '';
+      const scrollY = window.pageYOffset;
+
+      sections.forEach(sec => {
+        const secTop = sec.offsetTop - 140;
+        const secHeight = sec.offsetHeight;
+        if (scrollY >= secTop && scrollY < secTop + secHeight) {
+          currentId = sec.getAttribute('id');
+        }
+      });
+
+      let activeLink = null;
+      navLinks.forEach(link => {
+        link.classList.remove('active');
+        if (link.getAttribute('href') === `#${currentId}`) {
+          link.classList.add('active');
+          activeLink = link;
+        }
+      });
+
+      // Synchronize mobile drawer link active states
+      document.querySelectorAll('.mobile-nav-link').forEach(link => {
+        link.classList.toggle('active', link.getAttribute('href') === `#${currentId}`);
+      });
+
+      if (!activeLink && scrollY < 200) {
+        activeLink = navLinks[0];
+      }
+
+      positionIndicator(activeLink);
+    }
+
+    window.addEventListener('resize', () => {
+      updateActiveNav();
+      if (window.innerWidth > 768) {
+        toggleMobileMenu(false);
+      }
+    });
+
+    // Scroll Reveal Effect
+    const reveals = document.querySelectorAll('.reveal');
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('active');
+        }
+      });
+    }, { threshold: 0.1 });
+
+    reveals.forEach(r => revealObserver.observe(r));
+
+    // Interactive BibTeX Drawers
+    document.querySelectorAll('.bib-toggle').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        const targetId = btn.dataset.target;
+        const drawer = document.getElementById(targetId);
+        if (drawer) {
+          drawer.classList.toggle('open');
+          btn.classList.toggle('active');
+        }
+      });
+    });
+
+    // BibTeX Copy Functionality
+    document.querySelectorAll('.copy-bib-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const code = btn.nextElementSibling.innerText;
+        navigator.clipboard.writeText(code).then(() => {
+          const originalText = btn.textContent;
+          btn.textContent = 'Copied!';
+          btn.style.color = 'var(--accent)';
+          setTimeout(() => {
+            btn.textContent = originalText;
+            btn.style.color = '';
+          }, 2000);
+        });
+      });
+    });
+
+    // Publication Category Filters
+    const filterChips = document.querySelectorAll('.filter-chip');
+    const pubCards = document.querySelectorAll('.publication-card');
+
+    filterChips.forEach(chip => {
+      chip.addEventListener('click', () => {
+        filterChips.forEach(c => c.classList.remove('active'));
+        chip.classList.add('active');
+        const filter = chip.dataset.filter;
+
+        pubCards.forEach(card => {
+          if (filter === 'all' || card.dataset.category === filter) {
+            card.style.display = 'block';
+            setTimeout(() => { card.style.opacity = '1'; card.style.transform = 'translateY(0)'; }, 20);
+          } else {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(10px)';
+            setTimeout(() => { card.style.display = 'none'; }, 200);
+          }
+        });
+      });
+    });
+
+    // Interactive Floating Particles Canvas (Adaptive for Light and Dark themes)
+    const canvas = document.getElementById('canvas-particles');
+    const ctx = canvas.getContext('2d');
+    let width, height;
+    let particles = [];
+
+    function resizeCanvas() {
+      width = canvas.width = window.innerWidth;
+      height = canvas.height = window.innerHeight;
+    }
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
+
+    class Particle {
+      constructor() {
+        this.x = Math.random() * width;
+        this.y = Math.random() * height;
+        this.vx = (Math.random() - 0.5) * 0.35;
+        this.vy = (Math.random() - 0.5) * 0.35;
+        this.radius = Math.random() * 1.5 + 0.8;
+        this.alpha = Math.random() * 0.4 + 0.2;
+      }
+
+      update() {
+        this.x += this.vx;
+        this.y += this.vy;
+        if (this.x < 0) this.x = width;
+        if (this.x > width) this.x = 0;
+        if (this.y < 0) this.y = height;
+        if (this.y > height) this.y = 0;
+      }
+
+      draw(isDark) {
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+        ctx.fillStyle = isDark
+          ? `rgba(148, 180, 204, ${this.alpha})`
+          : `rgba(100, 116, 139, ${this.alpha * 0.6})`;
+        ctx.fill();
+      }
+    }
+
+    const particleCount = Math.min(Math.floor(window.innerWidth / 28), 42);
+    for (let i = 0; i < particleCount; i++) {
+      particles.push(new Particle());
+    }
+
+    function animateParticles() {
+      ctx.clearRect(0, 0, width, height);
+      const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+
+      // Connect nodes
+      for (let i = 0; i < particles.length; i++) {
+        for (let j = i + 1; j < particles.length; j++) {
+          const dx = particles[i].x - particles[j].x;
+          const dy = particles[i].y - particles[j].y;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+          if (dist < 110) {
+            ctx.beginPath();
+            ctx.moveTo(particles[i].x, particles[i].y);
+            ctx.lineTo(particles[j].x, particles[j].y);
+            ctx.strokeStyle = isDark
+              ? `rgba(45, 212, 191, ${0.12 * (1 - dist / 110)})`
+              : `rgba(13, 148, 136, ${0.14 * (1 - dist / 110)})`;
+            ctx.lineWidth = 0.7;
+            ctx.stroke();
+          }
+        }
+      }
+
+      particles.forEach(p => {
+        p.update();
+        p.draw(isDark);
+      });
+
+      requestAnimationFrame(animateParticles);
+    }
+    animateParticles();
+
+    // Initial page load
+    const savedTheme = localStorage.getItem('theme') || 'light';
+    applyTheme(savedTheme);
     setLanguage('en');
+
+    window.addEventListener('load', () => {
+      updateActiveNav();
+      setTimeout(updateActiveNav, 150);
+    });
   </script>
 </body>
+
 </html>
