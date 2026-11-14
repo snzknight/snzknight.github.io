@@ -445,7 +445,11 @@
 
     /* Original Classic Mobile Navigation Drawer */
     html.is-ios-device .mobile-nav-drawer {
-      top: calc(100% + 8px);
+      position: fixed;
+      top: 68px;
+      left: 50%;
+      transform: translateX(-50%) translateY(-8px);
+      width: min(1140px, calc(100% - 32px));
       background: var(--header-bg-scrolled);
       backdrop-filter: blur(20px);
       -webkit-backdrop-filter: blur(20px);
@@ -456,9 +460,15 @@
       flex-direction: column;
       gap: 4px;
       opacity: 0;
-      transform: translateY(-8px);
       pointer-events: none;
       transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    @media (max-width: 768px) {
+      html.is-ios-device .mobile-nav-drawer {
+        top: 64px;
+        width: calc(100% - 24px);
+      }
     }
 
     html.is-ios-device .mobile-nav-drawer::before {
@@ -467,7 +477,7 @@
 
     html.is-ios-device .mobile-nav-drawer.open {
       opacity: 1;
-      transform: translateY(0);
+      transform: translateX(-50%) translateY(0);
       pointer-events: auto;
     }
 
@@ -938,71 +948,114 @@
       transform: translateY(-3.5px) rotate(-45deg);
     }
 
-    /* Mobile Nav Dropdown Drawer - Apple Liquid Glass with High-Legibility Gaussian Blur */
+    /* Mobile Nav Dropdown Drawer - Apple Liquid Glass Style with Enhanced Gaussian Blur */
     .mobile-nav-drawer {
       display: none;
-      position: absolute;
-      top: calc(100% + 10px);
-      left: 0;
-      right: 0;
-      background: rgba(255, 255, 255, 0.84);
-      backdrop-filter: blur(28px) saturate(190%) contrast(102%);
-      -webkit-backdrop-filter: blur(28px) saturate(190%) contrast(102%);
-      border: 1px solid rgba(255, 255, 255, 0.90);
+      position: fixed;
+      top: 68px;
+      left: 50%;
+      transform: translateX(-50%) translateY(-12px) scale(0.96);
+      width: min(1140px, calc(100% - 32px));
+      background: var(--header-bg-scrolled);
+      backdrop-filter: blur(16px) saturate(190%) contrast(102%);
+      -webkit-backdrop-filter: blur(16px) saturate(190%) contrast(102%);
+      border: 1px solid var(--header-border);
       border-radius: var(--radius-md);
-      box-shadow:
-        inset 0 1.5px 1px 0 rgba(255, 255, 255, 0.95),
-        inset 0 -4px 12px 0 rgba(15, 23, 42, 0.03),
-        0 20px 48px -8px rgba(15, 23, 42, 0.14),
-        0 4px 16px rgba(0, 0, 0, 0.04);
+      box-shadow: var(--header-shadow-scrolled);
       padding: 10px;
       flex-direction: column;
       gap: 6px;
       opacity: 0;
       visibility: hidden;
-      transform: translateY(-12px) scale(0.96);
-      transform-origin: top right;
+      transform-origin: top center;
       pointer-events: none;
       transition:
         opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1),
-        transform 0.4s cubic-bezier(0.34, 1.35, 0.64, 1),
+        transform 0.35s cubic-bezier(0.34, 1.35, 0.64, 1),
         visibility 0.3s ease;
-      z-index: 100;
+      z-index: 49;
       overflow: hidden;
       isolation: isolate;
     }
 
-    [data-theme="dark"] .mobile-nav-drawer {
-      background: rgba(18, 25, 36, 0.84);
-      border: 1px solid rgba(255, 255, 255, 0.14);
-      box-shadow:
-        inset 0 1px 0.8px 0 rgba(255, 255, 255, 0.20),
-        inset 0 -6px 18px 0 rgba(0, 0, 0, 0.50),
-        0 24px 56px -8px rgba(0, 0, 0, 0.80),
-        0 4px 18px rgba(0, 0, 0, 0.60);
+    @media (max-width: 768px) {
+      .mobile-nav-drawer {
+        display: flex;
+        top: 64px;
+        width: calc(100% - 24px);
+      }
     }
 
+    [data-theme="dark"] .mobile-nav-drawer {
+      background: var(--header-bg-scrolled);
+      border: 1px solid var(--header-border);
+      box-shadow: var(--header-shadow-scrolled);
+    }
+
+    /* Desktop Chromium Liquid Glass Displacement filter + Moderate Gaussian Blur */
+    html.supports-liquid-shader .mobile-nav-drawer {
+      backdrop-filter: url(#liquid-glass-drawer-filter) blur(3.5px) contrast(1.15) brightness(1.04) saturate(1.2);
+      -webkit-backdrop-filter: url(#liquid-glass-drawer-filter) blur(3.5px) contrast(1.15) brightness(1.04) saturate(1.2);
+    }
+
+    /* Convex Lens Curvature Ambient Overhead Refraction Sheen (Identical to Site Header) */
     .mobile-nav-drawer::before {
       content: "";
       position: absolute;
       top: 0;
       left: 0;
       right: 0;
-      height: 38px;
+      height: 48%;
       border-radius: var(--radius-md) var(--radius-md) 0 0;
-      background: linear-gradient(180deg, rgba(255, 255, 255, 0.45) 0%, transparent 100%);
+      background: linear-gradient(180deg,
+          rgba(255, 255, 255, 0.48) 0%,
+          rgba(255, 255, 255, 0.08) 50%,
+          transparent 100%);
       pointer-events: none;
       z-index: 0;
+      transition: opacity 0.3s ease;
     }
 
     [data-theme="dark"] .mobile-nav-drawer::before {
-      background: linear-gradient(180deg, rgba(255, 255, 255, 0.08) 0%, transparent 100%);
+      background: linear-gradient(180deg,
+          rgba(255, 255, 255, 0.09) 0%,
+          rgba(255, 255, 255, 0.01) 50%,
+          transparent 100%);
+    }
+
+    /* Dynamic Specular Lens Light Tracking Following Cursor (Identical to Site Header) */
+    .mobile-nav-drawer::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      background: radial-gradient(circle 70px at var(--mouse-x, 50%) var(--mouse-y, 50%),
+          var(--liquid-glass-shine) 0%,
+          rgba(255, 255, 255, 0.22) 35%,
+          transparent 70%);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+      z-index: 0;
+      mix-blend-mode: overlay;
+    }
+
+    [data-theme="dark"] .mobile-nav-drawer::after {
+      background: radial-gradient(circle 70px at var(--mouse-x, 50%) var(--mouse-y, 50%),
+          rgba(255, 255, 255, 0.14) 0%,
+          rgba(255, 255, 255, 0.03) 40%,
+          transparent 70%);
+      mix-blend-mode: overlay;
+    }
+
+    .mobile-nav-drawer:hover::after {
+      opacity: 1;
     }
 
     .mobile-nav-drawer.open {
       opacity: 1;
       visibility: visible;
-      transform: translateY(0) scale(1);
+      transform: translateX(-50%) translateY(0) scale(1);
       pointer-events: auto;
     }
 
@@ -2426,14 +2479,14 @@
         </button>
       </div>
     </div>
-
-    <!-- Mobile Navigation Drawer Dropdown -->
-    <div class="mobile-nav-drawer" id="mobileDrawer">
-      <a href="#about" class="mobile-nav-link" data-i18n="navAbout">About</a>
-      <a href="#interests" class="mobile-nav-link" data-i18n="navInterests">Interests</a>
-      <a href="#publications" class="mobile-nav-link" data-i18n="navPublications">Publications</a>
-    </div>
   </header>
+
+  <!-- Mobile Navigation Drawer Dropdown (Independent Top-Level Backdrop Root) -->
+  <div class="mobile-nav-drawer" id="mobileDrawer">
+    <a href="#about" class="mobile-nav-link" data-i18n="navAbout">About</a>
+    <a href="#interests" class="mobile-nav-link" data-i18n="navInterests">Interests</a>
+    <a href="#publications" class="mobile-nav-link" data-i18n="navPublications">Publications</a>
+  </div>
 
   <div class="page-wrapper">
     <!-- Hero Section -->
@@ -3023,6 +3076,10 @@
       mobileMenuBtn.classList.toggle('open', shouldOpen);
       mobileDrawer.classList.toggle('open', shouldOpen);
       mobileMenuBtn.setAttribute('aria-expanded', shouldOpen ? 'true' : 'false');
+      if (shouldOpen && window.drawerGlassInstance) {
+        window.drawerGlassInstance.updateShader();
+        setTimeout(() => window.drawerGlassInstance.updateShader(), 120);
+      }
     }
 
     mobileMenuBtn.addEventListener('click', (e) => {
@@ -3125,6 +3182,11 @@
         btn.addEventListener('pointermove', updateButtonGlint);
         btn.addEventListener('pointerdown', updateButtonGlint);
       });
+      const drawer = document.getElementById('mobileDrawer');
+      if (drawer) {
+        drawer.addEventListener('pointerenter', updateButtonGlint);
+        drawer.addEventListener('pointermove', updateButtonGlint);
+      }
     }
 
     // Navigation Floating Pill & Active Spy
@@ -3336,6 +3398,7 @@
         this.target = typeof targetElement === 'string' ? document.querySelector(targetElement) : targetElement;
         if (!this.target) return;
 
+        this.options = options;
         this.id = options.id || 'liquid-glass';
         this.filterId = `${this.id}-filter`;
         this.mapId = `${this.id}-map`;
@@ -3384,6 +3447,7 @@
 
           this.feImage = document.createElementNS('http://www.w3.org/2000/svg', 'feImage');
           this.feImage.setAttribute('id', this.mapId);
+          this.feImage.setAttribute('result', this.mapId);
           this.feImage.setAttribute('preserveAspectRatio', 'none');
 
           this.feDisplacementMap = document.createElementNS('http://www.w3.org/2000/svg', 'feDisplacementMap');
@@ -3410,8 +3474,8 @@
 
       updateShader() {
         const rect = this.target.getBoundingClientRect();
-        const width = Math.max(rect.width, 240);
-        const height = Math.max(rect.height, 36);
+        const width = Math.round(rect.width || this.target.offsetWidth || this.options.minWidth || 320);
+        const height = Math.round(rect.height || this.target.offsetHeight || this.options.minHeight || 160);
 
         this.filter.setAttribute('width', width.toString());
         this.filter.setAttribute('height', height.toString());
@@ -3432,7 +3496,10 @@
         const aspect = mapW / mapH;
         const halfH = 0.5;
         const halfW = aspect * 0.5;
-        const radius = halfH; // Capsule full border radius
+        
+        // Support custom corner radius (for drawers/cards) or default capsule (halfH)
+        const cornerPx = this.options.borderRadius !== undefined ? this.options.borderRadius : (height * 0.5);
+        const radius = Math.min(halfH, cornerPx / height);
 
         for (let i = 0; i < data.length; i += 4) {
           const px = (i / 4) % mapW;
@@ -3447,12 +3514,11 @@
           const nx = ix * aspect;
           const ny = iy;
 
-          // Compute Signed Distance Field to outer capsule boundary
+          // Compute Signed Distance Field to outer rounded rectangle boundary
           const dist = LiquidGlass.roundedRectSDF(nx, ny, halfW, halfH, radius);
 
           // Droplet Meniscus Lens: balanced natural refraction band
-          // Set to 0.22 (smoothly between initial 0.12 and heavy 0.38)
-          const lensBand = 0.22;
+          const lensBand = this.options.lensBand || 0.22;
           let factor = 0;
           if (dist <= 0.02 && dist >= -lensBand) {
             // Smoothly ramps up towards the rim
@@ -3487,8 +3553,10 @@
         this.feImage.setAttributeNS('http://www.w3.org/1999/xlink', 'href', dataUrl);
         this.feImage.setAttribute('href', dataUrl);
 
-        // Natural, balanced droplet refraction scale (between initial 14-30 and heavy 32-56)
-        const targetScale = Math.max(22, Math.min(38, height * 0.60));
+        // Targeted refraction scale
+        const targetScale = this.options.scale !== undefined
+          ? this.options.scale
+          : Math.max(22, Math.min(38, height * (this.options.borderRadius !== undefined ? 0.35 : 0.60)));
         this.feDisplacementMap.setAttribute('scale', targetScale.toString());
       }
 
@@ -3524,13 +3592,27 @@
                         (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
 
     let liquidGlassInstance = null;
+    let drawerGlassInstance = null;
 
     if (!isIOSDevice) {
-      // Desktop / Non-iOS devices: activate Liquid Glass shader
+      // Desktop / Non-iOS devices: activate Liquid Glass shader on header and mobile drawer
       document.documentElement.classList.add('supports-liquid-shader');
       liquidGlassInstance = new LiquidGlass(document.getElementById('siteHeader'), {
         id: 'liquid-glass'
       });
+
+      const drawerEl = document.getElementById('mobileDrawer');
+      if (drawerEl) {
+        drawerGlassInstance = new LiquidGlass(drawerEl, {
+          id: 'liquid-glass-drawer',
+          borderRadius: 14,
+          minWidth: 280,
+          minHeight: 140,
+          lensBand: 0.26,
+          scale: 36
+        });
+        window.drawerGlassInstance = drawerGlassInstance;
+      }
     } else {
       // iOS devices (iPhone / iPad):
       // Restores the original classic frosted glass design (from commit 71eaaa7)
@@ -3548,6 +3630,9 @@
       setTimeout(updateActiveNav, 150);
       if (liquidGlassInstance) {
         liquidGlassInstance.requestUpdate();
+      }
+      if (drawerGlassInstance) {
+        drawerGlassInstance.requestUpdate();
       }
     });
   </script>
