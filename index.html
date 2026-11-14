@@ -11,11 +11,18 @@
   <meta name="author" content="Naizhe Sun">
   <title>Naizhe Sun | Personal Homepage</title>
 
-  <!-- Prevent theme flicker before DOM render -->
+  <!-- Prevent theme flicker and detect iOS devices before DOM render -->
   <script>
     (function () {
       const savedTheme = localStorage.getItem('theme') || 'light';
       document.documentElement.setAttribute('data-theme', savedTheme);
+
+      // Fast iOS device detection to eliminate layout/style shifts
+      const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) || 
+                    (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+      if (isIOS) {
+        document.documentElement.classList.add('is-ios-device');
+      }
     })();
   </script>
 
@@ -357,24 +364,220 @@
       -webkit-backdrop-filter: url(#liquid-glass-filter) blur(0.25px) contrast(1.2) brightness(1.05) saturate(1.15);
     }
 
-    /* Dedicated iOS / WebKit Liquid Glass optical enhancement (Apple Beveled Lens & Caustic Edge) */
-    html.is-ios-webkit .site-header {
-      -webkit-backdrop-filter: blur(28px) saturate(200%) contrast(105%);
-      backdrop-filter: blur(28px) saturate(200%) contrast(105%);
-      box-shadow:
-        var(--header-shadow),
-        inset 0 0 0 1px rgba(255, 255, 255, 0.25),
-        inset 0 2px 4px 0 rgba(255, 255, 255, 0.38),
-        inset 0 -2px 5px 0 rgba(0, 0, 0, 0.08);
+    /* =========================================================
+       iOS Device Fallback: Full Restoration of Pre-Liquid Glass
+       Classic Editorial Frosted Glass Design (from commit 71eaaa7)
+       ========================================================= */
+    html.is-ios-device {
+      --header-bg: rgba(255, 255, 255, 0.82);
+      --header-bg-scrolled: rgba(255, 255, 255, 0.94);
     }
 
-    [data-theme="dark"].is-ios-webkit .site-header,
-    [data-theme="dark"] html.is-ios-webkit .site-header {
-      box-shadow:
-        var(--header-shadow),
-        inset 0 0 0 1px rgba(255, 255, 255, 0.09),
-        inset 0 1.5px 2px 0 rgba(255, 255, 255, 0.20),
-        inset 0 -2px 6px 0 rgba(0, 0, 0, 0.50);
+    html.is-ios-device[data-theme="dark"],
+    [data-theme="dark"] html.is-ios-device {
+      --header-bg: rgba(13, 22, 31, 0.78);
+      --header-bg-scrolled: rgba(11, 18, 26, 0.92);
+    }
+
+    /* Original Classic Frosted Glass Site Header */
+    html.is-ios-device .site-header {
+      background: var(--header-bg);
+      backdrop-filter: blur(18px) saturate(160%);
+      -webkit-backdrop-filter: blur(18px) saturate(160%);
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow-sm);
+      transition: var(--transition-smooth);
+    }
+
+    html.is-ios-device .site-header.scrolled {
+      top: 10px;
+      background: var(--header-bg-scrolled);
+      box-shadow: var(--shadow-lg);
+    }
+
+    /* Remove Liquid Glass lens reflections and spotlight overlays on iOS */
+    html.is-ios-device .site-header::before,
+    html.is-ios-device .site-header::after {
+      display: none !important;
+    }
+
+    /* Original Scroll-To-Top Button */
+    html.is-ios-device .back-to-top {
+      width: 42px;
+      height: 42px;
+      background: var(--bg-card);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid var(--border);
+      color: var(--ink-dim);
+      box-shadow: var(--shadow-sm);
+    }
+
+    html.is-ios-device .back-to-top:hover {
+      color: var(--accent);
+      border-color: var(--accent);
+      transform: translateY(-3px);
+      box-shadow: 0 8px 20px var(--accent-glow);
+    }
+
+    /* Original Theme & Mobile Menu Control Buttons */
+    html.is-ios-device .theme-toggle-btn,
+    html.is-ios-device .mobile-menu-btn {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      color: var(--ink-dim);
+      box-shadow: none;
+    }
+
+    html.is-ios-device .language-toggle {
+      background: var(--accent-glow);
+      border: 1px solid var(--border-accent);
+      color: var(--accent);
+      box-shadow: none;
+    }
+
+    html.is-ios-device .language-toggle:hover {
+      background: var(--accent);
+      color: var(--action-primary-ink);
+      box-shadow: 0 0 16px var(--accent-glow);
+      transform: translateY(-1px);
+    }
+
+    /* Original Classic Mobile Navigation Drawer */
+    html.is-ios-device .mobile-nav-drawer {
+      top: calc(100% + 8px);
+      background: var(--header-bg-scrolled);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      box-shadow: var(--shadow-lg);
+      padding: 10px;
+      flex-direction: column;
+      gap: 4px;
+      opacity: 0;
+      transform: translateY(-8px);
+      pointer-events: none;
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    html.is-ios-device .mobile-nav-drawer::before {
+      display: none !important;
+    }
+
+    html.is-ios-device .mobile-nav-drawer.open {
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: auto;
+    }
+
+    html.is-ios-device .mobile-nav-link {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 14px;
+      border-radius: var(--radius-sm);
+      color: var(--ink);
+      font-size: 0.92rem;
+      font-weight: 500;
+      text-decoration: none;
+      background: transparent;
+      border: none;
+      box-shadow: none;
+      transition: background 0.2s, color 0.2s;
+    }
+
+    html.is-ios-device .mobile-nav-link:hover,
+    html.is-ios-device .mobile-nav-link.active {
+      background: var(--accent-glow);
+      color: var(--accent);
+    }
+
+    /* Restore all liquid-glass-btn to original clean button design on iOS */
+    html.is-ios-device .liquid-glass-btn {
+      box-shadow: none !important;
+      backdrop-filter: none !important;
+      -webkit-backdrop-filter: none !important;
+    }
+
+    html.is-ios-device .liquid-glass-btn::before,
+    html.is-ios-device .liquid-glass-btn::after {
+      display: none !important;
+    }
+
+    /* Original Publication Buttons */
+    html.is-ios-device .pub-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 5px 12px;
+      height: 32px;
+      border-radius: var(--radius-sm);
+      font-family: var(--font-mono);
+      font-size: 0.76rem;
+      font-weight: 600;
+      color: var(--ink-dim);
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      text-decoration: none;
+      cursor: pointer;
+      box-shadow: none;
+      transition: var(--transition-smooth);
+    }
+
+    html.is-ios-device .pub-btn:hover {
+      background: var(--accent-glow);
+      border-color: var(--accent);
+      color: var(--accent);
+      text-decoration: none;
+      transform: translateY(-1px);
+    }
+
+    /* Original Filter Chips */
+    html.is-ios-device .filter-chip {
+      padding: 6px 14px;
+      border-radius: var(--radius-full);
+      font-size: 0.8rem;
+      font-weight: 500;
+      color: var(--ink-dim);
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      cursor: pointer;
+      box-shadow: none;
+      transition: var(--transition-smooth);
+    }
+
+    html.is-ios-device .filter-chip:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    html.is-ios-device .filter-chip.active {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: var(--action-primary-ink);
+    }
+
+    /* Original Action Buttons */
+    html.is-ios-device .action-btn.primary {
+      background: var(--action-primary-bg);
+      color: var(--action-primary-ink);
+      box-shadow: 0 4px 18px var(--accent-glow);
+      border: 1px solid transparent;
+    }
+
+    html.is-ios-device .action-btn.secondary {
+      background: var(--action-sec-bg);
+      color: var(--action-sec-ink);
+      border: 1px solid var(--action-sec-border);
+      box-shadow: none;
+    }
+
+    html.is-ios-device .copy-bib-btn {
+      background: var(--copy-btn-bg);
+      border: 1px solid var(--bibtex-border);
+      color: var(--bibtex-ink);
+      box-shadow: none;
     }
 
     /* Convex Lens Curvature Ambient Overhead Refraction Sheen */
@@ -2916,11 +3119,13 @@
       btn.style.setProperty('--mouse-y', `${y}px`);
     };
 
-    document.querySelectorAll('.liquid-glass-btn').forEach(btn => {
-      btn.addEventListener('pointerenter', updateButtonGlint);
-      btn.addEventListener('pointermove', updateButtonGlint);
-      btn.addEventListener('pointerdown', updateButtonGlint);
-    });
+    if (!document.documentElement.classList.contains('is-ios-device')) {
+      document.querySelectorAll('.liquid-glass-btn').forEach(btn => {
+        btn.addEventListener('pointerenter', updateButtonGlint);
+        btn.addEventListener('pointermove', updateButtonGlint);
+        btn.addEventListener('pointerdown', updateButtonGlint);
+      });
+    }
 
     // Navigation Floating Pill & Active Spy
     const navLinks = document.querySelectorAll('.site-nav .nav-link');
@@ -3314,23 +3519,23 @@
     // =========================================================
     // Device & Browser Engine Sniffing (if-else branching)
     // =========================================================
-    const isIOSDevice = /iPad|iPhone|iPod/.test(navigator.userAgent) || 
+    const isIOSDevice = document.documentElement.classList.contains('is-ios-device') ||
+                        /iPad|iPhone|iPod/.test(navigator.userAgent) || 
                         (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
-    const isWebKitEngine = /^((?!chrome|android).)*safari/i.test(navigator.userAgent) || isIOSDevice;
 
     let liquidGlassInstance = null;
 
-    if (!isIOSDevice && !isWebKitEngine) {
-      // Desktop Chromium / Blink supports SVG <feDisplacementMap> on backdrop-filter
+    if (!isIOSDevice) {
+      // Desktop / Non-iOS devices: activate Liquid Glass shader
       document.documentElement.classList.add('supports-liquid-shader');
       liquidGlassInstance = new LiquidGlass(document.getElementById('siteHeader'), {
         id: 'liquid-glass'
       });
     } else {
-      // iPhone / iPad / WebKit Safari:
-      // Uses Apple WebKit ultra-blur + beveled optical lens styling.
-      // Skips 2D canvas SDF loop to conserve mobile battery & memory.
-      document.documentElement.classList.add('is-ios-webkit');
+      // iOS devices (iPhone / iPad):
+      // Restores the original classic frosted glass design (from commit 71eaaa7)
+      // Skips 2D canvas SDF loop completely to conserve mobile battery and memory.
+      document.documentElement.classList.add('is-ios-device');
     }
 
     // Initial page load
